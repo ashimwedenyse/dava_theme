@@ -1,0 +1,326 @@
+/* --- NAVIGATION BAR & BUTTON OVERRIDES ONLY --- */
+/* (Form Styles moved to theme.scss to fix alignment) */
+
+/* 1. Navbar Specifics */
+.o_main_navbar {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.o_main_navbar > ul > li > a > i {
+    font-size: 18px !important;
+}
+
+/* 2. Button Color Overrides */
+
+/* Save / Edit -> Primary */
+.o_form_button_save,
+.o_form_button_edit {
+    background: $primary_accent !important;
+    border-color: $primary_accent !important;
+    color: white !important;
+}
+
+/* Create -> Primary */
+.o-kanban-button-new,
+.o_list_button_add,
+.o_form_button_create {
+    background: $primary_accent !important;
+    border-color: $primary_accent !important;
+    color: white !important;
+}
+
+/* Cancel -> Danger/Grey */
+.o_form_button_cancel,
+.o_import_cancel {
+    background: #fff !important;
+    border-color: #d1d5db !important;
+    color: #dc2626 !important; /* Red Text */
+}
+.o_form_button_cancel:hover {
+    background: #fef2f2 !important;
+    border-color: #dc2626 !important;
+}
+
+/* Import -> Info Blue */
+.o_button_import {
+    color: #0891b2 !important;
+    border-color: #0891b2 !important;
+    background: #fff !important;
+}
+
+/* 3. Status Bar Helpers */
+.o_form_statusbar {
+    background-color: #fff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+}
+
+.o_arrow_button.btn-primary {
+    background: $primary_accent !important;
+}
+
+/* Status buttons: make status items visually filled when active and
+   outlined when inactive, matching the theme accent color. This applies
+   to form status radio buttons and the current arrow-style status. */
+.o_statusbar_status button[role="radio"],
+.o_statusbar_status .o_arrow_button_current,
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown {
+    border-radius: 0 !important;
+    padding: 6px 12px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+/* Inactive/status options (outline variant) */
+.o_statusbar_status button[role="radio"] {
+    /* Inactive status: dark gray filled chips to visually contrast active states */
+    background-color: #374151 !important; /* dark gray */
+    color: #ffffff !important;
+    border: 1px solid rgba(15,23,42,0.12) !important;
+}
+
+/* Active/selected status (filled variant) */
+.o_statusbar_status button[role="radio"][aria-checked="true"],
+.o_statusbar_status button[role="radio"].active,
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown.active {
+    background-color: $primary_accent !important;
+    color: #ffffff !important;
+    border-color: $primary_accent !important;
+    box-shadow: none !important;
+}
+
+/* Hover/Focus tweaks */
+.o_statusbar_status button[role="radio"]:hover,
+.o_statusbar_status button[role="radio"]:focus {
+    /* Slightly lighten on hover/focus for better affordance */
+    background-color: #475569 !important; /* slightly lighter gray */
+}
+
+/* Layout & overflow: keep statuses inline, provide consistent spacing
+   and ensure single-line labels with ellipsis when needed. */
+.o_statusbar_status {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+}
+.o_statusbar_status button[role="radio"],
+.o_statusbar_status .o_arrow_button_current,
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 220px !important;
+}
+
+/* Hide the duplicate dropdown toggle more broadly when radio-style
+   status buttons are present. Use several selector variants for broad
+   DOM shapes; modern browsers will also match the :has() rule. */
+.o_statusbar_status .o_arrow_button_current ~ button.dropdown-toggle.o_last.o-dropdown,
+.o_statusbar_status button[role="radio"] ~ button.dropdown-toggle.o_last.o-dropdown,
+.o_statusbar_status .o_arrow_button_current + button.dropdown-toggle.o_last.o-dropdown {
+    display: none !important;
+}
+.o_statusbar_status:has(button[role="radio"]) > button.dropdown-toggle.o_last.o-dropdown {
+    display: none !important;
+}
+
+/* Ensure the arrow/notch and any pseudo-elements match the active
+   background color instead of inheriting a dark/black fallback. */
+.o_statusbar_status button[role="radio"][aria-checked="true"],
+.o_statusbar_status button[role="radio"].active {
+    background-color: $primary_accent !important;
+    color: #ffffff !important;
+    border-color: $primary_accent !important;
+}
+.o_statusbar_status .o_arrow_button_current::before,
+.o_statusbar_status .o_arrow_button_current::after {
+    /* default arrow pseudo-elements match the default (gray) arrow */
+    background-color: #374151 !important;
+    border-color: #374151 !important;
+    color: #ffffff !important;
+}
+
+/* Default arrow-style current indicator should be gray unless specifically mapped */
+.o_statusbar_status .o_arrow_button_current {
+    background-color: #374151 !important;
+    border-color: #374151 !important;
+    color: #ffffff !important;
+}
+
+/* Hide the trailing ellipsis button if it contains no visible menu
+   (fallback). This avoids the unnecessary '...' when there is no overflow. */
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown[aria-expanded="false"][aria-haspopup="false"] {
+    display: none !important;
+}
+
+/* Hide duplicate status dropdown in the form statusbar when individual
+   radio status buttons are present (prevents doubled 'Quotation' label).
+   Use sibling selector for broad support and :has as an additional rule
+   for modern browsers. */
+.o_statusbar_status .o_arrow_button_current ~ button.dropdown-toggle.o_last.o-dropdown {
+    display: none !important;
+}
+
+/* Modern browsers: if the statusbar contains radio buttons, hide the final
+   dropdown toggle that duplicates the selected state. */
+.o_statusbar_status:has(button[role="radio"]) > button.dropdown-toggle.o_last.o-dropdown {
+    display: none !important;
+}
+
+/* Hide the first status button when it is the active/checked state.
+   This removes the leading 'active' status chip that appears first. */
+.o_statusbar_status button[role="radio"]:first-child[aria-checked="true"],
+.o_statusbar_status button[role="radio"].active:first-child {
+    display: none !important;
+}
+
+/* Specifically hide the duplicate leading dropdown-toggle that appears
+   as the first status chip (e.g., "Sales Order"). This targets the
+   button with classes `o_first o-dropdown` when it sits in the
+   statusbar to avoid affecting other dropdowns elsewhere. */
+.o_statusbar_status > button.dropdown-toggle.o_first.o-dropdown,
+.o_statusbar_status button.dropdown-toggle.o_first.o-dropdown[aria-expanded="false"][disabled] {
+    display: none !important;
+}
+
+/* Map active status button colors to the same semantic colors used in list view.
+   Add/adjust `data-value` keys below to match your model's state identifiers. */
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="done"],
+.o_statusbar_status .o_arrow_button_current[data-value="done"],
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="completed"],
+.o_statusbar_status .o_arrow_button_current[data-value="completed"] {
+    background-color: var(--success) !important;
+    border-color: var(--success) !important;
+    color: #ffffff !important;
+}
+.o_statusbar_status .o_arrow_button_current[data-value="done"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="done"]::after,
+.o_statusbar_status .o_arrow_button_current[data-value="completed"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="completed"]::after {
+    background-color: var(--success) !important;
+    border-color: var(--success) !important;
+}
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="cancel"],
+.o_statusbar_status .o_arrow_button_current[data-value="cancel"],
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="cancelled"],
+.o_statusbar_status .o_arrow_button_current[data-value="cancelled"] {
+    background-color: var(--danger) !important;
+    border-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+.o_statusbar_status .o_arrow_button_current[data-value="cancel"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="cancel"]::after,
+.o_statusbar_status .o_arrow_button_current[data-value="cancelled"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="cancelled"]::after {
+    background-color: var(--danger) !important;
+    border-color: var(--danger) !important;
+}
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="sent"],
+.o_statusbar_status .o_arrow_button_current[data-value="sent"] {
+    background-color: var(--info) !important;
+    border-color: var(--info) !important;
+    color: #ffffff !important;
+}
+.o_statusbar_status .o_arrow_button_current[data-value="sent"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="sent"]::after {
+    background-color: var(--info) !important;
+    border-color: var(--info) !important;
+}
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="draft"],
+.o_statusbar_status .o_arrow_button_current[data-value="draft"] {
+    background-color: var(--info) !important;
+    border-color: var(--info) !important;
+    color: #ffffff !important;
+}
+.o_statusbar_status .o_arrow_button_current[data-value="draft"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="draft"]::after {
+    background-color: var(--info) !important;
+    border-color: var(--info) !important;
+}
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="sale"],
+.o_statusbar_status .o_arrow_button_current[data-value="sale"],
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="sale_order"],
+.o_statusbar_status .o_arrow_button_current[data-value="sale_order"] {
+    background-color: var(--success) !important;
+    border-color: var(--success) !important;
+    color: #ffffff !important;
+}
+.o_statusbar_status .o_arrow_button_current[data-value="sale"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="sale"]::after,
+.o_statusbar_status .o_arrow_button_current[data-value="sale_order"]::before,
+.o_statusbar_status .o_arrow_button_current[data-value="sale_order"]::after {
+    background-color: var(--success) !important;
+    border-color: var(--success) !important;
+}
+
+/* Also map explicit `quotation` label to list-style info color */
+.o_statusbar_status button[role="radio"][aria-checked="true"][data-value="quotation"],
+.o_statusbar_status .o_arrow_button_current[data-value="quotation"] {
+    background-color: var(--info) !important;
+    border-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+/* 4. Tab Highlights */
+.nav-tabs .nav-link.active {
+    border-top: 3px solid $primary_accent !important;
+    color: $primary_accent !important;
+    font-weight: 600;
+}
+
+/* Ensure any non-active status buttons (radio or arrow variants) are dark gray.
+   This overrides accidental blue/primary color on adjacent chips. */
+.o_statusbar_status button[role="radio"]:not([aria-checked="true"]),
+.o_statusbar_status button[role="radio"]:not(.active) {
+    background-color: #8e9296 !important;
+    color: #ffffff !important;
+    border-color: rgba(15,23,42,0.12) !important;
+}
+.o_statusbar_status .o_arrow_button:not(.o_arrow_button_current),
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown:not(.active) {
+    background-color: #8e9296 !important;
+    color: #ffffff !important;
+    border-color: rgba(15,23,42,0.12) !important;
+}
+.o_statusbar_status .o_arrow_button:not(.o_arrow_button_current)::before,
+.o_statusbar_status .o_arrow_button:not(.o_arrow_button_current)::after,
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown:not(.active)::before,
+.o_statusbar_status button.dropdown-toggle.o_last.o-dropdown:not(.active)::after {
+    background-color: #8e9296 !important;
+    border-color: #8e9296 !important;
+}
+
+/* Extra override: some arrow/status buttons include `btn-primary` or
+   `.o_arrow_button.btn-primary` which may apply the primary blue color.
+   Force those to gray when they are not the current/active indicator. */
+.o_statusbar_status .o_arrow_button.btn-primary:not(.o_arrow_button_current),
+.o_statusbar_status .btn-primary:not(.o_arrow_button_current),
+.o_statusbar_status button.btn-primary:not(.active) {
+    background: #8e9296 !important;
+    background-image: none !important;
+    border-color: #8e9296 !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+.o_statusbar_status .o_arrow_button.btn-primary:not(.o_arrow_button_current)::before,
+.o_statusbar_status .o_arrow_button.btn-primary:not(.o_arrow_button_current)::after,
+.o_statusbar_status button.btn-primary:not(.active)::before,
+.o_statusbar_status button.btn-primary:not(.active)::after {
+    background-color: #8e9296 !important;
+    border-color: #8e9296 !important;
+}
+
+/* Final catch-all: enforce gray for any non-active status chips and their
+    pseudo-elements inside the statusbar. This uses high specificity and
+    !important to override other theme rules that may apply a blue accent. */
+.o_statusbar_status :where(button, a, .btn, .o_arrow_button, .dropdown-toggle):not([aria-checked="true"]):not(.active),
+.o_statusbar_status :where(button, a, .btn, .o_arrow_button, .dropdown-toggle):not([aria-checked="true"]):not(.active)::before,
+.o_statusbar_status :where(button, a, .btn, .o_arrow_button, .dropdown-toggle):not([aria-checked="true"]):not(.active)::after {
+     background: #8e9296 !important;
+     background-image: none !important;
+     border-color: #8e9296 !important;
+     color: #ffffff !important;
+     box-shadow: none !important;
+}

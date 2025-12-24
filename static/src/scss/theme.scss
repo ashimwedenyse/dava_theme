@@ -1,0 +1,93 @@
+/* -------------------------------------------------------------------------- */
+/* THEME.SCSS - MAIN INTERFACE STYLING                                        */
+/* -------------------------------------------------------------------------- */
+
+@font-face {
+    font-family: 'Poppins' !important;
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+}
+
+/* --- VARIABLES --- */
+$o-radius: 6px;
+$primary_accent: #2C3E50; /* Dark Blue */
+$highlight_accent: #F39C12; /* Orange */
+$bg-color: #ECF0F1; /* Light Grey Background */
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: $bg-color;
+    color: $primary_accent;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 1. NAVBAR (Brand Color)                                                    */
+/* -------------------------------------------------------------------------- */
+.o_main_navbar {
+    background: $primary_accent !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+    color: white !important;
+}
+
+.o_menu_brand, .o_nav_entry, .dropdown-toggle {
+    color: white !important;
+    opacity: 0.95;
+}
+
+.o_menu_sections .o_nav_entry:hover,
+.o_menu_systray .o_nav_entry:hover {
+    background: rgba(255,255,255,0.1) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. BUTTONS                                                                 */
+/* -------------------------------------------------------------------------- */
+.btn-primary {
+    background-color: $primary_accent !important;
+    border-color: $primary_accent !important;
+    color: #fff !important;
+}
+.btn-primary:hover {
+    background-color: darken($primary_accent, 5%) !important;
+    border-color: darken($primary_accent, 5%) !important;
+}
+
+/* Secondary/Link Buttons */
+.btn-secondary {
+    background-color: #fff !important;
+    border-color: #BDC3C7 !important;
+    color: $primary_accent !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. INPUTS & FORM CONTROLS                                                  */
+/* -------------------------------------------------------------------------- */
+.o_form_view .o_input:not(.o_field_image input),
+.o_form_view select,
+.o_form_view textarea {
+    border: 1px solid #BDC3C7 !important;
+    border-radius: $o-radius !important;
+    color: $primary_accent !important;
+    padding: 6px 12px !important;
+    box-shadow: none !important;
+}
+
+/* Focus State -> USES ACCENT ORANGE */
+.o_input:focus, select:focus, textarea:focus {
+    border-color: $highlight_accent !important;
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.15) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. SEARCH VIEW                                                             */
+/* -------------------------------------------------------------------------- */
+.o_control_panel .o_searchview {
+    background: #fff !important;
+    border: 1px solid #BDC3C7 !important;
+    border-radius: $o-radius !important;
+}
+
+.o_searchview_facet {
+    background: rgba(44, 62, 80, 0.08) !important; /* Soft Primary */
+    color: $primary_accent !important;
+    border-radius: 20px !important;
+}

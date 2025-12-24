@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-inherit="web.NavBar" t-inherit-mode="extension" owl="1">
+        <xpath expr="//nav[hasclass('o_main_navbar')]" position="replace">
+            <nav class="o_main_navbar d-flex align-items-center justify-content-between"
+                 t-ref="o_main_navbar"
+                 t-on-dropdown-item-selected="onNavBarDropdownItemSelection"
+                 data-command-category="navbar">
+
+                <div class="d-flex align-items-center flex-grow-1">
+                    <div class="top_heading d-flex align-items-center me-3" t-ref="top_heading">
+                        <div class="o_app_drawer_toggle me-2">
+                            <t t-call="web.NavBar.AppsMenu">
+                                <t t-set="apps" t-value="menuService.getApps()"/>
+                            </t>
+                        </div>
+                        <DropdownItem
+                                t-if="currentApp"
+                                t-esc="currentApp.name"
+                                class="'o_menu_brand d-none d-md-block font-weight-bold'"
+                                onSelected="() => this.onNavBarDropdownItemSelection(currentApp)"
+                                attrs="{ href: getMenuItemHref(currentApp), 'data-menu-xmlid': currentApp.xmlid, 'data-section': currentApp.id }"
+                        />
+                    </div>
+                    <div class="o_menu_sections d-none d-md-flex align-items-center">
+                        <t t-if="currentAppSections.length"
+                           t-call="web.NavBar.SectionsMenu">
+                            <t t-set="sections" t-value="currentAppSections"/>
+                        </t>
+                    </div>
+                    <div class="d-block d-md-none">
+                        <t t-call="web.NavBar.SectionsMenu.MoreDropdown">
+                            <t t-set="sections" t-value="currentAppSections"/>
+                        </t>
+                    </div>
+                </div>
+
+                <div class="o_menu_systray d-flex align-items-center" role="menu">
+                    <t t-foreach="systrayItems" t-as="item" t-key="item_index">
+                        <ErrorHandler onError="error => handleItemError(error, item)">
+                            <t t-component="item.Component" t-props="item.props"/>
+                        </ErrorHandler>
+                    </t>
+                </div>
+            </nav>
+
+            <div class="sidebar_panel" id="sidebar_panel">
+                <div class="sidebar">
+                    <div class="sidebar_close">
+                        <a id="closeSidebar" style="cursor: pointer;">
+                            <img src="/dava_theme/static/src/img/icons/close.png"/>
+                        </a>
+                    </div>
+                    <div class="sidebar_logo">
+                        <img src="/dava_theme/static/src/img/code_logo.png" class="logo_img"/>
+                    </div>
+                    <!--<h6 class="sidebar_head">MENU</h6>-->
+
+                    <ul class="sidebar_menu" t-ref="sidebarLinks">
+                        <t t-foreach="menuService.getApps()" t-as="app" t-key="'A_' + app_index">
+                            <li data-toggle="tooltip" data-placement="right" t-att-title="app.name">
+                                <a role="menuitem"
+                                   t-attf-href="#menu_id={{app.id}}"
+                                   t-att-data-id="app.id"
+                                   attrs="{ href: getMenuItemHref(app), 'data-menu-xmlid': app.xmlid, 'data-section': app.id }"
+                                   class="nav-link"
+                                   t-on-click="() => this.onNavBarDropdownItemSelection(app)">
+                                    <img style="height: 3em;" t-if="app.webIconData" class="o_app_icon me-2" t-attf-src="{{app.webIconData}}"/>
+                                    <span class="sidebar_app_name"><t t-esc="app.name"/></span>
+                                </a>
+                            </li>
+                        </t>
+                        <t t-foreach="menuService.getApps()" t-as="app" t-key="'B_' + app_index">
+                            <li data-toggle="tooltip" data-placement="right" t-att-title="app.name">
+                                <a role="menuitem"
+                                   t-attf-href="#menu_id={{app.id}}"
+                                   t-att-data-id="app.id"
+                                   attrs="{ href: getMenuItemHref(app), 'data-menu-xmlid': app.xmlid, 'data-section': app.id }"
+                                   class="nav-link"
+                                   t-on-click="() => this.onNavBarDropdownItemSelection(app)">
+                                    <img style="height: 3em;" t-if="app.webIconData" class="o_app_icon me-2" t-attf-src="{{app.webIconData}}"/>
+                                    <span class="sidebar_app_name"><t t-esc="app.name"/></span>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension" owl="1">
+        <xpath expr="//Dropdown" position="replace">
+            <li class="dropdown">
+                <a id="openSidebar" style="display: block; cursor: pointer; padding: 0 10px;" t-ref="openSidebar">
+                    <i class="fa fa-bars fa-lg"/>
+                </a>
+                <a id="closeSidebar" style="display: none; cursor: pointer; padding: 0 10px;" t-ref="closeSidebar">
+                    <i class="fa fa-bars fa-lg"/>
+                </a>
+            </li>
+        </xpath>
+    </t>
+
+    <t t-inherit="web.UserMenu" t-inherit-mode="extension" owl="1">
+        <xpath expr="//small[hasclass('oe_topbar_name')]" position="replace">
+            <div class="oe_topbar_name font-weight-bold ms-2"/>
+        </xpath>
+    </t>
+</templates>

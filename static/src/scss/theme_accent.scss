@@ -1,0 +1,58 @@
+/* -------------------------------------------------------------------------- */
+/* THEME ACCENTS - PROFESSIONAL ENTERPRISE EDITION                            */
+/* -------------------------------------------------------------------------- */
+
+/* --- 1. CORE PALETTE --- */
+// Primary: Dark Professional Blue
+$primary_accent: #2C3E50;
+$primary_hover:  #1a252f;
+$primary_active: #0e1419;
+
+// Accent: Vibrant Orange (for focus/highlight)
+$highlight_accent: #F39C12;
+
+/* Semantic Colors (Standardized) */
+$o-success: #2ECC71; /* Green */
+$o-danger:  #E74C3C; /* Red */
+$o-warning: #F1C40F; /* Yellow */
+$o-info:    #3498DB; /* Blue */
+
+/* Secondary & Neutrals */
+$secondary_accent: #ECF0F1; /* Soft Grey/White */
+$text-main: #2C3E50;
+$text-muted: #7F8C8D;
+$border-color: #BDC3C7;
+
+/* --- 2. LAYOUT VARIABLES --- */
+$o-input-height: 34px;
+$o-radius: 6px;
+
+/* CRITICAL RESTORATION: Shadow Variables required by Odoo/Theme mixins */
+$o-shadow-subtle: 0 1px 3px rgba(0,0,0,0.05);
+$o-shadow-lift: 0 4px 6px rgba(0,0,0,0.08);
+
+/* --- 3. CSS VARIABLES (Bridge for JS/Owl) --- */
+:root {
+  --primary-accent: #{$primary_accent};
+  --primary-hover: #{$primary_hover};
+  --primary-rgb: 44, 62, 80; /* RGB of #2C3E50 */
+
+  --highlight-accent: #{$highlight_accent};
+
+  --text-main: #{$text-main};
+  --text-muted: #{$text-muted};
+
+  /* Neo/Theme Legacy Variables (Required by other theme files) */
+  --neo-primary: #{$primary_accent};
+  --neo-primary-soft: rgba(44, 62, 80, 0.08);
+  --neo-sidebar-bg: #2C3E50;
+}
+
+/* 4. LEGACY COMPATIBILITY */
+$inverse_accent: #ffffff;
+$inverse-accent: #ffffff;
+$f_color: $text-main;
+$muted_color: $text-muted;
+$bg_light: $secondary_accent;
+$glass_border: $border-color;
+$bg_white: #ffffff;

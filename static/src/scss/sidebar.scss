@@ -1,0 +1,228 @@
+/* -------------------------------------------------------------------------- */
+/* SIDEBAR.SCSS - CLEAN + SCROLLABLE + DEEP BREATH GLOW                       */
+/* -------------------------------------------------------------------------- */
+
+/* --- 1. Variables --- */
+$sidebar-width: 200px;
+$color-dark-grey: #151f2b;
+$color-orange: #ff6b00;
+$color-orange-glow: #ff9e42;
+$text-light: #ffffff;
+$anim-speed: 0.3s;
+
+/* --- 2. Animations --- */
+
+/* NEW: Deep Breath Motion (Expansion & Opacity Pulse) */
+@keyframes deepBreath {
+    0% {
+        transform: scaleY(1) translateY(0);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scaleY(1.15) translateY(-15px); /* Inhale: Expands up slightly */
+        opacity: 1;     /* Glow gets brighter */
+    }
+    100% {
+        transform: scaleY(1) translateY(0);
+        opacity: 0.6;   /* Exhale */
+    }
+}
+
+/* Seamless Scroll (Kept as requested) */
+@keyframes seamlessScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* --- 3. Sidebar Layout --- */
+
+#sidebar_panel {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: $sidebar-width;
+    z-index: 999;
+
+    background-color: $color-dark-grey;
+
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+
+    /* SCROLLING ENABLED */
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: none;
+
+    /* Custom Scrollbar for Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 107, 0, 0.3) transparent;
+}
+
+/* Custom Scrollbar Styling (Chrome/Safari/Edge) */
+#sidebar_panel::-webkit-scrollbar {
+    width: 4px; /* Very thin */
+}
+#sidebar_panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+#sidebar_panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 107, 0, 0.3);
+    border-radius: 4px;
+}
+#sidebar_panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 107, 0, 0.8);
+}
+
+/* --- EXTREMELY SOFT ORANGE GLOW (Positioned "Very Down") --- */
+#sidebar_panel::before {
+    content: "";
+    position: absolute;
+
+    /* MODIFIED: Starts much lower (60% down the screen) */
+    top: 60%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+
+    /* Gradient adapted for bottom glow */
+    background: linear-gradient(
+        0deg, /* Pushing upwards from bottom */
+        rgba(255, 107, 0, 0.15) 0%,   /* Stronger at very bottom */
+        rgba(255, 107, 0, 0.05) 50%,  /* Fades out upwards */
+        rgba(255, 107, 0, 0.00) 100%
+    );
+
+    background-size: 100% 100%;
+
+    /* MODIFIED: New "Deep Breath" animation */
+    animation: deepBreath 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.sidebar_panel .sidebar {
+    padding: 0;
+    white-space: nowrap;
+    backdrop-filter: blur(4px);
+    border-radius: 8px;
+    min-height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Close Button --- */
+.sidebar_panel .sidebar_close {
+    text-align: end;
+    display: none;
+    position: sticky;
+    height: 40px;
+    padding-top: 10px;
+    top: 0;
+    background: transparent;
+    z-index: 10;
+}
+
+.sidebar_panel .sidebar_close a#closeSidebar {
+    font-size: 20px;
+    margin-right: 15px;
+    color: $text-light;
+    opacity: 0.6;
+    transition: $anim-speed all;
+}
+
+.sidebar_panel .sidebar_close a#closeSidebar:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+    color: $color-orange;
+}
+
+/* --- Logo --- */
+.sidebar_panel .sidebar .sidebar_logo {
+    position: relative;
+    z-index: 5;
+    padding-top: 20px;
+    text-align: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: $color-dark-grey;
+}
+
+.sidebar_panel .sidebar .sidebar_logo img {
+    max-width: 140px;
+    filter: drop-shadow(0px 0px 3px rgba(255, 107, 0, 0.25));
+    transition: transform $anim-speed;
+}
+
+.sidebar_panel .sidebar .sidebar_logo:hover img {
+    transform: scale(1.05);
+}
+
+.sidebar_panel .sidebar .sidebar_head {
+    background: $color-dark-grey;
+    padding: 15px 15px 10px 20px;
+    color: $color-orange;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* --- Menu (Scrolling) --- */
+.sidebar_panel .sidebar .sidebar_menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    animation: seamlessScroll 40s linear infinite;
+    position: relative;
+    width: 100%;
+}
+
+.sidebar_panel .sidebar .sidebar_menu:hover {
+    animation-play-state: paused;
+}
+
+.sidebar_panel .sidebar .sidebar_menu li {
+    margin-bottom: 2px;
+}
+
+.sidebar_panel .sidebar .sidebar_menu li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 10px 12px 25px;
+    color: $text-light;
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.sidebar_panel .sidebar .sidebar_menu li a .sidebar_img {
+    width: 20px;
+    margin-right: 12px;
+    filter: grayscale(100%);
+    transition: 0.2s;
+}
+
+.sidebar_panel .sidebar .sidebar_menu li:hover a {
+    background: rgba(255, 107, 0, 0.12);
+    padding-left: 30px;
+    border-left: 3px solid $color-orange;
+    box-shadow: inset 5px 0 10px -5px rgba(255, 107, 0, 0.35);
+}
+
+.sidebar_panel .sidebar .sidebar_menu li:hover a .sidebar_img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.sidebar_panel .sidebar a.nav-link.active {
+    background: rgba(255, 107, 0, 0.18);
+    color: $color-orange-glow !important;
+    border-left: 3px solid $color-orange;
+    font-weight: 600;
+}
+
+.sidebar_panel .nav-link {
+    opacity: 0.7;
+}

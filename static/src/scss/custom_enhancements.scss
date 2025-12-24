@@ -1,0 +1,2293 @@
+/* Custom visual enhancements for Backend Theme - "Pearl & Midnight" Edition */
+/* UPDATED WITH COMPLETE TASK REQUIREMENTS */
+
+/* -------------------------------------------------------------------------- */
+/* 1. GLOBAL VARIABLES & UTILS                                                */
+/* -------------------------------------------------------------------------- */
+:root {
+    --btn-height: 36px;
+    --radius-std: 6px;
+    --radius-card: 16px; /* NEW: Soft radius for cards */
+    --radius-kanban: 20px; /* NEW: Larger radius for kanban/app tiles */
+    --primary-accent: #2C3E50; /* Deep Blue/Black - Main Text Color */
+    --primary-hover: #4271a0;
+    --anim-speed: 0.3s;
+    --accent: #F39C12;
+    --success: #2ECC71;
+    --warning: #F1C40F;
+    --danger: #E74C3C;
+    --info: #3498DB;
+    --card-padding: 24px; /* NEW: Consistent internal padding */
+    /* List header gradient - override these to customize list header colors */
+    --list-header-start: var(--primary-accent);
+    --list-header-end: var(--primary-hover);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. NAVBAR: GLASSY "PEARL" EFFECT                                           */
+/* -------------------------------------------------------------------------- */
+.o_main_navbar {
+    background: linear-gradient(120deg, rgba(255,255,255,0.98), rgba(241,245,249,0.98)) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 10px rgba(37, 36, 36, 0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    height: 60px !important;
+    align-items: center;
+    transition: all var(--anim-speed) ease;
+}
+
+.o_main_navbar .top_heading {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1e293b;
+}
+
+.o_theme_accent {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-std);
+    background: linear-gradient(135deg, var(--primary-accent), #4338ca);
+    box-shadow: 0 4px 10px rgba(67, 56, 202, 0.2);
+    margin-right: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. ANIMATIONS (PROFESSIONAL FALLING EFFECT)                                */
+/* -------------------------------------------------------------------------- */
+
+/* Dramatic Falling Animation with Bounce */
+@keyframes dropInFalling {
+    0% {
+        opacity: 0;
+        transform: translateY(-25px) scale(0.95);
+    }
+    60% {
+        transform: translateY(5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Apply Animation to ALL Dropdowns */
+.dropdown-menu {
+    animation: dropInFalling 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 1px solid rgba(0,0,0,0.08) !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.05) !important;
+    border-radius: 8px !important;
+    padding: 8px 0 !important;
+    margin-top: 6px !important;
+    transform-origin: top center;
+}
+
+/* Dropdown Items Hover */
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: rgba(44, 62, 80, 0.05) !important;
+    color: var(--primary-accent) !important;
+    transform: translateX(5px);
+    transition: transform 0.2s ease;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. TABLES & LISTS - CLEAN, MODERN STYLE WITH ROW HOVER                    */
+/* -------------------------------------------------------------------------- */
+
+/* Table Container - Card Treatment */
+.o_list_view,
+.table-responsive,
+.o_list_table_wrapper {
+    border-radius: var(--radius-card) !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+    background: #ffffff;
+    margin: 16px 0;
+}
+
+/* Table Header - Professional Styling */
+.table thead th,
+.o_list_view .o_list_table thead th {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+    border-bottom: 2px solid #e2e8f0 !important;
+    vertical-align: middle !important;
+    height: 48px !important;
+    padding: 12px 16px !important;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Table Body - Subtle Row Separation */
+.table tbody tr,
+.o_list_view tbody tr {
+    border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+/* Row Hover Effect - Smooth Highlight */
+.table tbody tr:hover,
+.o_list_view tbody tr:hover,
+.o_data_row:hover {
+    background-color: rgba(44, 62, 80, 0.02) !important;
+    transform: translateX(2px);
+    cursor: pointer;
+}
+
+/* Sticky & styled headers for list views */
+.o_list_view .o_list_table thead tr,
+.o_list_view .o_list_table thead th {
+    position: sticky !important;
+    top: 0; /* will stick to top of the scroll container */
+    z-index: 6;
+    background: rgba(104, 110, 125, 0.02) !important;
+    border-bottom: 1px solid rgba(226,232,240,1) !important;
+    box-shadow: 0 2px 6px rgba(15,23,42,0.04) !important;
+    backdrop-filter: blur(2px);
+}
+
+/* Ensure the action column header stays above other cells when sticky */
+.o_list_view .o_list_table thead th.o_list_controller {
+    z-index: 9 !important;
+    right: 0;
+}
+
+/* Slightly increase padding & weight for header labels for clarity */
+.o_list_view .o_list_table thead th {
+    padding: 12px 14px !important;
+    font-weight: 600 !important;
+    color: #344054 !important;
+}
+
+
+/* Table Cells - Clean Spacing */
+.table td,
+.o_list_view td {
+    padding: 12px 16px !important;
+    vertical-align: middle !important;
+    color: var(--primary-accent) !important;
+}
+
+/* Responsive Table - Mobile Optimization */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .table thead th {
+        font-size: 0.7rem !important;
+        padding: 8px 12px !important;
+    }
+    
+    .table td {
+        padding: 8px 12px !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* List View Icons - Improved Spacing */
+.o_list_view .o_list_record_selector,
+.o_list_view .o_list_button {
+    padding: 8px !important;
+}
+
+.o_list_view i,
+.o_list_view .fa,
+.o_list_view .oi {
+    color: var(--primary-accent) !important;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.o_list_view i:hover,
+.o_list_view .fa:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Alternating Row Colors (Optional Enhancement) */
+.table tbody tr:nth-child(even),
+.o_list_view tbody tr:nth-child(even) {
+    background-color: rgba(248, 250, 252, 0.5) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. CARDS & CONTAINERS - ROUNDED CORNERS, SUBTLE SHADOWS, CONSISTENT PADDING */
+/* -------------------------------------------------------------------------- */
+
+/* Base Card Styling - Applied to All Card-Like Containers */
+.o_card, 
+.o_content,
+.o_form_sheet,
+.o_form_view .o_form_sheet_bg,
+.card,
+.oe_kanban_card,
+.modal-content,
+.o_dialog,
+.panel,
+.o_notebook {
+    border-radius: var(--radius-card) !important; /* Soft radius for modern feel */
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important; /* Subtle shadow for depth */
+    background: #ffffff !important;
+    padding: var(--card-padding) !important; /* Consistent internal padding */
+    border: 1px solid rgba(226, 232, 240, 0.6) !important;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Interactive Cards - Lift on Hover */
+.o_card:hover,
+.card:hover,
+.oe_kanban_card:hover {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+    transform: translateY(-2px);
+}
+
+/* Nested Cards - Reduced Shadow Depth */
+.o_card .o_card,
+.card .card {
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06) !important;
+    padding: 16px !important;
+    margin: 12px 0;
+}
+
+/* Form Sheets - Larger Padding for Breathing Room */
+.o_form_view .o_form_sheet,
+.o_form_sheet_bg {
+    padding: 32px !important;
+    margin: 20px auto !important;
+    max-width: 1400px;
+}
+
+/* Modal Dialogs - Consistent Card Treatment */
+.modal-content,
+.o_dialog {
+    border-radius: 16px !important;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.2) !important;
+    border: none !important;
+}
+
+/* Notebook/Tab Containers */
+.o_notebook {
+    padding: 20px !important;
+    margin-top: 12px;
+}
+
+/* Widget Containers Inside Forms */
+.o_form_view .o_group,
+.o_form_view .o_inner_group {
+    padding: 20px !important;
+    border-radius: 10px !important;
+    background: rgba(248, 250, 252, 0.5) !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(226, 232, 240, 0.4) !important;
+    margin: 8px 0;
+}
+
+/* Chatter/Activity Containers */
+.o_form_view .o_chatter,
+.o_mail_thread {
+    border-radius: var(--radius-card) !important;
+    padding: 20px !important;
+    background: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+    margin-top: 24px;
+}
+
+/* Dashboard Widgets */
+.o_dashboard .o_block,
+.o_dashboard_action {
+    border-radius: var(--radius-card) !important;
+    padding: var(--card-padding) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+    background: #ffffff;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    margin-bottom: 16px;
+}
+
+/* Stat Cards/KPI Boxes */
+.o_kanban_view .o_kanban_card_header,
+.oe_kanban_global_click {
+    padding: 20px !important;
+    border-radius: var(--radius-card) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Kanban / App-tile visual treatment - larger rounded corners and stronger depth */
+/* Makes kanban records look like the app tiles in the screenshot (bolder radius) */
+/* -------------------------------------------------------------------------- */
+.o_kanban_view .o_kanban_record,
+.o_kanban_view .o_kanban_card,
+.oe_kanban_card,
+.o_kanban_record {
+    border-radius: var(--radius-kanban) !important; /* pronounced corner radius */
+    border: 1px solid rgba(15, 23, 42, 0.06) !important; /* subtle but visible edge */
+    box-shadow: 0 12px 36px rgba(15, 23, 42, 0.10) !important; /* stronger depth */
+    background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%) !important;
+    padding: 18px !important;
+    overflow: hidden !important;
+    transition: box-shadow 0.22s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.o_kanban_view .o_kanban_record .o_kanban_card_header,
+.o_kanban_view .o_kanban_card .oe_kanban_card_header {
+    border-top-left-radius: calc(var(--radius-kanban) - 6px) !important;
+    border-top-right-radius: calc(var(--radius-kanban) - 6px) !important;
+}
+
+.o_kanban_view .o_kanban_record:hover,
+.o_kanban_view .o_kanban_card:hover,
+.oe_kanban_card:hover {
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.16) !important;
+    transform: translateY(-4px) !important;
+    border-color: rgba(15,23,42,0.08) !important;
+}
+
+/* Make the record inspector handle corners when inline elements sit at edges */
+.o_kanban_view .o_kanban_record .o_kanban_image,
+.o_kanban_view .o_kanban_record .o_kanban_primary {
+    border-radius: calc(var(--radius-kanban) - 8px) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. ALIGNMENT & FITTING                                                     */
+/* -------------------------------------------------------------------------- */
+
+/* Unify Heights - apply to actual controls, not to wrapper elements */
+.btn,
+.o_input,
+.o_searchview_facet {
+    height: var(--btn-height) !important;
+    min-height: var(--btn-height) !important;
+    line-height: 1.5 !important;
+    font-size: 13px !important;
+    border-radius: var(--radius-std) !important;
+    box-sizing: border-box !important;
+}
+
+/* Inputs */
+.o_input {
+    padding: 0 10px !important;
+    background-color: #f9fafb !important;
+    border: 1px solid #e2e8f0 !important;
+    transition: all 0.2s ease;
+}
+.o_input:focus {
+    background-color: #ffffff !important;
+    border-color: var(--primary-accent) !important;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CRITICAL: Many2One Floating Dropdown Styles                                */
+/* -------------------------------------------------------------------------- */
+
+/* Ensure parent containers don't clip dropdowns - EXPANDED for lists/tables */
+.o_form_view,
+.o_form_sheet,
+.o_form_sheet_bg,
+.o_group,
+.o_field_widget,
+.o_field_many2one,
+.o_list_view,
+.o_list_table,
+.o_list_renderer,
+.o_data_row,
+.o_data_cell,
+table.o_list_table,
+table.o_list_table tbody,
+table.o_list_table tr,
+table.o_list_table td,
+.o_content,
+.o_form_editable_list {
+    overflow: visible !important;
+    position: relative;
+}
+
+/* CRITICAL: Prevent table cells from clipping */
+.o_list_table td.o_data_cell,
+.o_list_table th.o_column_sortable,
+.o_list_table .o_field_cell {
+    overflow: visible !important;
+    position: relative !important;
+}
+
+/* Floating dropdown container styles - HIGHEST Z-INDEX */
+.m2o-floating {
+    position: absolute !important;
+    z-index: 200000 !important;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.12) !important;
+    background: #ffffff !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(226,232,240,0.95) !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    animation: dropInFalling 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    margin: 0 !important;
+    clip-path: none !important;
+}
+
+/* When dropdown is positioned above input */
+.m2o-floating.m2o-floating-above {
+    transform-origin: bottom center;
+    animation: dropInFallingAbove 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes dropInFallingAbove {
+    0% {
+        opacity: 0;
+        transform: translateY(25px) scale(0.95);
+    }
+    60% {
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Ensure dropdown items are clickable */
+.m2o-floating .dropdown-item,
+.m2o-floating .o_m2o_dropdown_option,
+.m2o-floating li,
+.m2o-floating .ui-menu-item {
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.m2o-floating .dropdown-item:hover,
+.m2o-floating .o_m2o_dropdown_option:hover,
+.m2o-floating li:hover,
+.m2o-floating .ui-menu-item:hover {
+    background-color: rgba(44, 62, 80, 0.05) !important;
+    transform: translateX(3px);
+}
+
+/* Ensure the many2one input container doesn't clip */
+.o_field_many2one {
+    position: relative !important;
+    z-index: auto;
+}
+
+/* When many2one is focused, ensure proper stacking */
+.o_field_many2one:focus-within {
+    z-index: 1;
+    position: relative;
+}
+
+/* All autocomplete/dropdown variations */
+.o_autocomplete,
+.ui-autocomplete,
+.ui-menu,
+.select2-dropdown,
+.o_m2o_dropdown_option,
+.o-autocomplete--dropdown-menu {
+    z-index: 200000 !important;
+}
+
+/* Ensure Select2 dropdowns are also on top */
+.select2-container--open {
+    z-index: 200001 !important;
+}
+
+.select2-dropdown {
+    z-index: 200001 !important;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.12) !important;
+    border: 1px solid rgba(226,232,240,0.95) !important;
+    border-radius: 8px !important;
+}
+
+/* SPECIAL: Inline editable list dropdowns */
+.o_list_table .o_field_many2one .o_input,
+.o_data_row .o_field_many2one input {
+    position: relative;
+    z-index: auto;
+}
+
+/* When editing in list, ensure row doesn't clip */
+.o_data_row.o_selected_row,
+.o_data_row:focus-within {
+    overflow: visible !important;
+    position: relative;
+    z-index: 10;
+}
+
+/* Ensure table itself doesn't clip */
+.o_list_view .table-responsive,
+.o_list_view .o_content {
+    overflow: visible !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Buttons General */
+.btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    padding: 0 16px !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. BUTTONS & ACTIONS - STANDARDIZED HIERARCHY WITH HOVER TRANSITIONS       */
+/* -------------------------------------------------------------------------- */
+
+/* PRIMARY BUTTON - Main call-to-action */
+.btn-primary,
+.o_control_panel .o_control_panel_main_buttons .btn.btn-primary,
+.o_control_panel .o_control_panel_main_buttons .o_list_button_add {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-hover)) !important;
+    border-color: var(--primary-accent) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.2) !important;
+    font-weight: 600 !important;
+}
+
+.btn-primary:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(44, 62, 80, 0.25) !important;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* SECONDARY BUTTON - Alternative actions */
+.btn-secondary,
+.o_control_panel .btn-secondary {
+    background-color: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    color: var(--primary-accent) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+.btn-secondary:hover {
+    background-color: #f3f4f6 !important;
+    border-color: #9ca3af !important;
+    transform: translateY(-1px);
+}
+
+/* LIGHT BUTTON - Subtle actions */
+.btn-light {
+    background-color: #f8fafc !important;
+    border: 1px solid rgba(226,232,240,1) !important;
+    color: var(--primary-accent) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.btn-light:hover {
+    background-color: #f1f5f9 !important;
+    filter: brightness(0.98);
+}
+
+/* OUTLINE BUTTON - Minimal emphasis */
+.btn-outline,
+.btn-outline-primary {
+    background: transparent !important;
+    border: 1px solid var(--primary-accent) !important;
+    color: var(--primary-accent) !important;
+    box-shadow: none !important;
+}
+
+.btn-outline:hover,
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-hover)) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(44, 62, 80, 0.15) !important;
+}
+
+/* DANGER BUTTON - Destructive actions */
+.btn-danger {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2) !important;
+}
+
+.btn-danger:hover {
+    filter: brightness(0.92);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3) !important;
+}
+
+/* ACCENT BUTTON */
+.btn-accent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(243, 156, 18, 0.2) !important;
+}
+
+.btn-accent:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+/* SUCCESS BUTTON */
+.btn-success {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.2) !important;
+}
+
+.btn-success:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+/* WARNING BUTTON */
+.btn-warning {
+    background-color: var(--warning) !important;
+    color: #111111 !important;
+    box-shadow: 0 2px 8px rgba(241, 196, 15, 0.2) !important;
+}
+
+.btn-warning:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+/* INFO BUTTON */
+.btn-info {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2) !important;
+}
+
+.btn-info:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+/* LINK BUTTON - Text-like appearance */
+.btn-link,
+.o_control_panel .o_cp_switch_buttons .btn-link {
+    background: transparent !important;
+    color: var(--primary-accent) !important;
+    box-shadow: none !important;
+    border: none !important;
+    text-decoration: none;
+}
+
+.btn-link:hover {
+    color: var(--primary-hover) !important;
+    text-decoration: underline;
+}
+
+/* Small icon-only buttons */
+.btn.btn-sm,
+.o_control_panel .btn-sm {
+    min-width: 36px !important;
+    width: auto !important;
+    padding: 0 8px !important;
+}
+
+/* Button Group Spacing */
+.btn-group .btn {
+    margin-right: 8px;
+}
+
+.btn-group .btn:last-child {
+    margin-right: 0;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Control Panel Alignment */
+.o_control_panel .o_searchview {
+    padding: 0 5px !important;
+    border-radius: var(--radius-std) !important;
+    border: 1px solid #e2e8f0 !important;
+    display: flex;
+    align-items: center;
+    min-height: var(--btn-height) !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. SIDEBAR & MENU                                                          */
+/* -------------------------------------------------------------------------- */
+.o_main_navbar + .o_web_client .o_sidebar {
+    background: #ffffff;
+    border-right: 1px solid #f1f5f9;
+}
+.o_menu_sections .o_menu_section .o_menu_label {
+    font-weight: 700;
+    color: #94a3b8;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+.o_menu_section .o_menu_entry > a .o_menu_entry_level_1 {
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #475569;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+.o_menu_section .o_menu_entry > a:hover .o_menu_entry_level_1 {
+    background: rgba(44, 62, 80, 0.05);
+    color: var(--primary-accent);
+    transform: translateX(4px);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 7. CRITICAL ICON & COLOR VISIBILITY FIXES                                  */
+/* -------------------------------------------------------------------------- */
+
+/* A. General Secondary Buttons (Gray buttons) - Force Dark Text/Icons */
+.o_control_panel .btn-secondary,
+.o_cp_action_menus .btn,
+.o_search_options .btn {
+    background-color: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    color: var(--primary-accent) !important;
+}
+.o_control_panel .btn:not(.btn-primary):not(.btn-secondary) {
+    background-color: rgba(55, 80, 104, 0.04) !important;
+    border-color: transparent !important;
+    color: var(--primary-accent) !important;
+}
+.o_control_panel .btn-secondary:hover,
+.o_cp_action_menus .btn:hover {
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
+}
+
+/* Right-side control panel (smart) buttons */
+.o_control_panel .o_control_panel_navigation .btn,
+.o_control_panel .o_control_panel_actions .btn,
+.o_control_panel .o_cp_switch_buttons .btn {
+    /* Dark gray background for smart buttons; icons forced white for contrast */
+    background-color: #374151 !important; /* dark slate gray */
+    border-color: rgba(0,0,0,0.18) !important;
+    color: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12) !important;
+}
+.o_control_panel .o_control_panel_navigation .btn:hover,
+.o_control_panel .o_control_panel_actions .btn:hover,
+.o_control_panel .o_cp_switch_buttons .btn:hover {
+    background-color: #2b343b !important; /* darker on hover */
+    filter: none !important;
+}
+
+/* Ensure icons inside smart buttons retain their color/visibility */
+.o_control_panel .o_control_panel_navigation .btn > .oi,
+.o_control_panel .o_control_panel_navigation .btn > .fa,
+.o_control_panel .o_control_panel_navigation .btn > svg,
+.o_control_panel .o_control_panel_actions .btn > .oi,
+.o_control_panel .o_control_panel_actions .btn > .fa,
+.o_control_panel .o_control_panel_actions .btn > svg,
+.o_control_panel .o_cp_switch_buttons .btn > .oi,
+.o_control_panel .o_cp_switch_buttons .btn > .fa,
+.o_control_panel .o_cp_switch_buttons .btn > svg {
+    /* ensure icons contrast against the dark button background */
+    color: #ffffff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+/* Ensure small icon buttons keep consistent padding and contrast */
+.o_control_panel .btn.btn-sm,
+.o_control_panel .o_cp_switch_buttons .btn.btn-sm {
+    min-width: 36px !important;
+    width: auto !important;
+    padding: 0 8px !important;
+}
+
+/* Icon visibility enhancement */
+.o_control_panel .btn > .oi,
+.o_control_panel .btn > .fa,
+.o_control_panel .btn > .oi-fw,
+.o_control_panel .btn > .o_icon,
+.o_control_panel .btn > svg {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Ensure the plus icon for 'add' remains visible even when the sidebar is
+   closed. Some layout scripts may hide parts of the header; force the icon
+   to be shown for the common add button variants. */
+.o_control_panel .o_list_button_add > .fa,
+.o_control_panel .o_list_button_add i.fa,
+.o_control_panel .o_list_button_add > .oi,
+.o_control_panel .o_list_button_add > svg {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: var(--primary-accent) !important;
+}
+
+/* Make close / X icons use the danger color so they appear red */
+/* Make close / X icons use the danger color so they appear red. Targets
+   FontAwesome <i> variants and their ::before pseudo-element, and common
+   button/container nesting so it overrides inherited rules. */
+.fa.fa-times,
+.fa-times.fa-fw,
+i.fa.fa-times,
+.fa-times:before,
+button.btn.btn-secondary > .fa-times,
+.btn.btn-secondary .fa-times,
+.btn .fa-times,
+.o_control_panel .btn .fa-times,
+.o_form_view .btn .fa-times,
+.o_main_navbar .fa.fa-times,
+.sidebar_panel a#closeSidebar i.fa-times,
+.o_statusbar_status i.fa-times,
+.o_form_header .fa.fa-times,
+.o_dialog .fa.fa-times {
+    color: #ffffff !important;
+    background-color: var(--danger) !important;
+    fill: #ffffff !important;
+    padding: 3px 6px !important;
+    border-radius: 4px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+.o_control_panel .btn.btn-sm > .oi,
+.o_control_panel .btn.btn-sm > .fa,
+.o_control_panel .btn.btn-sm > svg {
+    padding: 4px !important;
+    border-radius: 4px !important;
+}
+
+/* B. Search View Dropdown/Caret Icons */
+.o_searchview_dropdown_toggler,
+.o_searchview_input_container .o_searchview_autocomplete li i,
+.o_control_panel .o_searchview i.o_searchview_icon,
+.o_control_panel .o_searchview .o_searchview_more {
+    color: var(--primary-accent) !important;
+    opacity: 0.8;
+}
+.o_searchview_dropdown_toggler:hover {
+    color: #000000 !important;
+    opacity: 1;
+}
+
+/* C. Discuss/Mail Sidebar Icons */
+.o_discuss_sidebar .fa-phone,
+.o_discuss_sidebar .fa-video-camera,
+.o_discuss_sidebar .fa-gear,
+.o_discuss_sidebar .o_mail_discuss_item_action,
+.o_mail_sidebar_title_action .fa {
+    color: var(--primary-accent) !important;
+    opacity: 0.7;
+    text-shadow: none !important;
+}
+
+.o_discuss_sidebar .fa-phone:hover,
+.o_discuss_sidebar .fa-video-camera:hover,
+.o_discuss_sidebar .o_mail_discuss_item_action:hover {
+    color: #16a34a !important;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Portal: Back to My Account button styling */
+.o_portal_back_container {
+    margin-top: 12px;
+    margin-bottom: 8px;
+    /* Position the portal back bar so it can overlap the header if needed
+       and appear in front of header action buttons (e.g. Contact Us). */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 56px; /* adjust if your header has different height */
+    z-index: 200002 !important;
+}
+.o_portal_back_btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: inherit;
+    background: transparent;
+    border: 1px solid transparent;
+}
+.o_portal_back_btn .o_portal_back_text {
+    display: inline-block;
+}
+/* Make the button visually consistent with portal design */
+.o_portal_back_btn.btn-outline-secondary {
+    color: var(--text-color, #333);
+    border-color: rgba(0,0,0,0.08);
+    background-color: rgba(255,255,255,0.0);
+}
+.o_portal_back_btn:hover {
+    color: var(--primary-hover) !important;
+    text-decoration: none;
+}
+
+/* Messaging menu unread-count badge: use success (green) */
+.o-mail-MessagingMenu-counter.badge.rounded-pill,
+.o-mail-MessagingMenu-counter.badge {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* D. Ensure Icons inside Control Panel Buttons are Dark */
+.o_control_panel .btn-secondary i,
+.o_cp_action_menus .fa {
+    color: var(--primary-accent) !important;
+}
+
+/* Ensure icons inside right-side switch buttons are white for contrast */
+.o_control_panel .o_cp_switch_buttons .btn > .oi,
+.o_control_panel .o_cp_switch_buttons .btn > .fa,
+.o_control_panel .o_cp_switch_buttons .btn > svg {
+    color: #ffffff !important;
+}
+
+/* Scoped hover color: apply primary-hover to inline links/icons/buttons
+   but exclude dropdowns, cards, list rows, nav menu hover backgrounds, etc. */
+a:hover:not(.dropdown-item), a:focus:not(.dropdown-item),
+a > .fa:hover, a > .oi:hover,
+.btn > .fa:hover, .btn > .oi:hover,
+.fa:hover, .oi:hover, .o_icon:hover, svg:hover,
+.o_control_panel .btn > .oi:hover, .o_control_panel .btn > .fa:hover,
+.o_main_navbar .fa:hover,
+.o_statusbar_status i:hover,
+.o_form_header .fa:hover,
+.o_dialog .fa:hover {
+    color: var(--primary-hover) !important;
+    fill: var(--primary-hover) !important;
+}
+
+/* Primary Action Buttons icons remain White */
+.btn-primary i {
+    color: white !important;
+}
+
+/* Ensure header/control-panel icons remain visible even if a script
+   toggles or replaces header classes. This forces essential action icons
+   to stay visible (add/plus, status, close) so the user can always toggle
+   the sidebar and perform actions. */
+header .o_control_panel .btn,
+header .o_control_panel .btn > .fa,
+header .o_control_panel .o_control_panel_navigation .fa,
+header .o_main_navbar .fa,
+header .o_control_panel .o_cp_switch_buttons .fa,
+header .o_control_panel .o_control_panel_actions .fa {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: inline-flex !important;
+    transform: none !important;
+}
+
+/* Ensure the main 'Add / +' button is always visible and clickable
+   across app switches. Targets common Odoo control panel layouts and
+   multiple icon libraries (FontAwesome, OI, SVG). */
+.o_control_panel .o_control_panel_main_buttons,
+.o_control_panel .o_control_panel_main_buttons .o_list_button_add,
+.o_control_panel .o_control_panel_main_buttons .o_list_button_add > .fa,
+.o_control_panel .o_control_panel_main_buttons .o_list_button_add > .oi,
+.o_control_panel .o_control_panel_main_buttons .o_list_button_add svg,
+.o_control_panel .o_control_panel_actions .o_list_button_add,
+header .o_control_panel .o_control_panel_main_buttons,
+header .o_control_panel .o_control_panel_main_buttons .o_list_button_add {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 9999 !important;
+}
+
+/* Some themes hide the whole control panel when header classes change —
+   force the container that holds the add button to remain shown. */
+.o_control_panel .o_control_panel_main_buttons {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Extra-safe rules: if any script replaces header classes or applies
+   app-specific classes that hide the control panel, force the control
+   panel and key icons to remain visible. These selectors deliberately
+   cover both data-attribute and class-name variants. */
+header[data-app-class] .o_control_panel,
+header[class*="app-active-"] .o_control_panel,
+header .o_control_panel.o_hidden,
+header .o_control_panel[hidden],
+body header .o_control_panel {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 99999 !important;
+}
+
+/* Force visibility for the hamburger and add icons specifically */
+.o_control_panel .fa-bars,
+.o_control_panel i.fa.fa-bars,
+.o_control_panel .fa-plus,
+.o_control_panel i.fa.fa-plus,
+.o_control_panel .oi-plus,
+.o_control_panel svg.o_icon {
+    visibility: visible !important;
+    display: inline-flex !important;
+    opacity: 1 !important;
+    color: var(--primary-accent) !important;
+}
+
+/* If some scripts move the control panel offscreen via transforms, keep
+   it in-place so icons remain clickable. */
+.o_control_panel {
+    transform: none !important;
+    left: auto !important;
+    right: 0 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. ALERTS & BADGES - COLOR-CODED STATES WITH CLEAR HIERARCHY              */
+/* -------------------------------------------------------------------------- */
+
+/* ALERTS - Color-coded with subtle backgrounds */
+.alert {
+    padding: 16px 20px !important;
+    border-radius: 10px !important;
+    border: 1px solid transparent !important;
+    background-color: rgba(15, 23, 42, 0.03) !important;
+    color: var(--primary-accent) !important;
+    margin: 12px 0 !important;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+/* Alert Title - Clear Hierarchy */
+.alert .alert-title,
+.alert .o_notification_title {
+    display: block !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    margin-bottom: 6px !important;
+    color: inherit !important;
+}
+
+/* Alert Message */
+.alert .alert-message,
+.alert .o_notification_content {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    color: inherit !important;
+}
+
+/* Alert Actions (Optional Buttons) */
+.alert .alert-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+/* SUCCESS ALERT */
+.alert-success,
+.o_notification_success {
+    background-color: rgba(46, 204, 113, 0.10) !important;
+    border-color: rgba(46, 204, 113, 0.25) !important;
+    color: #14532d !important;
+}
+
+.alert-success::before {
+    content: "✓";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--success);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* WARNING ALERT */
+.alert-warning,
+.o_notification_warning {
+    background-color: rgba(241, 196, 15, 0.10) !important;
+    border-color: rgba(241, 196, 15, 0.25) !important;
+    color: #92400e !important;
+}
+
+.alert-warning::before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--warning);
+    color: #111;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* DANGER ALERT */
+.alert-danger,
+.o_notification_danger,
+.alert-error {
+    background-color: rgba(231, 76, 60, 0.10) !important;
+    border-color: rgba(231, 76, 60, 0.25) !important;
+    color: #7f1d1d !important;
+}
+
+.alert-danger::before {
+    content: "✕";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* INFO ALERT */
+.alert-info,
+.o_notification_info {
+    background-color: rgba(52, 152, 219, 0.10) !important;
+    border-color: rgba(52, 152, 219, 0.25) !important;
+    color: #0b4f7a !important;
+}
+
+.alert-info::before {
+    content: "i";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--info);
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
+/* BADGES - Compact State Indicators */
+.badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 4px 10px !important;
+    border-radius: 999px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    background-color: rgba(15,23,42,0.08) !important;
+    color: var(--primary-accent) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
+    white-space: nowrap !important;
+}
+
+/* Badge Color Variants */
+.badge-success {
+    background-color: var(--success) !important;
+}
+.badge-warning {
+    background-color: var(--warning) !important;
+    color: #111827 !important;
+}
+
+.badge-danger {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+.badge-info {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.badge-accent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+.badge-primary {
+    background-color: var(--primary-accent) !important;
+    color: #ffffff !important;
+}
+
+/* Support Bootstrap-style `text-bg-*` classes used by Odoo's badge renderer
+   (e.g. <span class="badge rounded-pill text-bg-success">Sales Order</span>).
+   Map them to the theme variables so list-status badges render in the theme colors. */
+.badge.text-bg-success,
+.text-bg-success,
+.o_list_view .badge.text-bg-success {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+}
+
+.badge.text-bg-warning,
+.text-bg-warning,
+.o_list_view .badge.text-bg-warning {
+    background-color: var(--warning) !important;
+    color: #111827 !important;
+}
+
+.badge.text-bg-danger,
+.text-bg-danger,
+.o_list_view .badge.text-bg-danger {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+.badge.text-bg-info,
+.text-bg-info,
+.o_list_view .badge.text-bg-info {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.badge.text-bg-primary,
+.text-bg-primary,
+.o_list_view .badge.text-bg-primary {
+    background-color: var(--primary-accent) !important;
+    color: #ffffff !important;
+}
+
+.badge.text-bg-accent,
+.text-bg-accent,
+.o_list_view .badge.text-bg-accent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+/* Some Odoo installs render cancelled/status badges using neutral "secondary" or
+   "muted" text-bg classes. Ensure those map to the theme's cancel/danger color
+   so a CANCELLED badge shows the intended background rather than a dull gray. */
+.badge.text-bg-secondary,
+.text-bg-secondary,
+.o_list_view .badge.text-bg-secondary,
+.badge.text-bg-muted,
+.text-bg-muted,
+.o_list_view .badge.text-bg-muted {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+/* Some Odoo versions use numeric shade utility classes like `text-bg-300` for
+   soft status badges. Map the common 300 shade (light neutral) to the theme's
+   cancel/danger color so Cancelled badges render consistently. */
+.badge.text-bg-300,
+.text-bg-300,
+.o_list_view .badge.text-bg-300,
+.o_list_view td[data-name="state"] .badge.text-bg-300,
+.o_list_view .o_badge.text-bg-300 {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+/* Posted status should use the theme accent (orange) instead of danger.
+   Match common DOM variants (data-value, data-state, and value-based classes).
+   This rule appears after the generic text-bg-300 mapping so it overrides it. */
+.o_list_view .badge[data-value="posted"],
+.o_list_view .o_badge[data-value="posted"],
+.o_list_view .badge[data-state="posted"],
+.o_list_view .o_badge[data-state="posted"],
+.o_list_view .badge.posted,
+.o_list_view .o_badge.posted {
+    background-color: var(--accent) !important;
+    color: #111827 !important;
+}
+
+.o_list_view td[data-name="state"] .badge[data-value="posted"],
+.o_list_view td[data-name="state"] .o_badge[data-value="posted"],
+.o_list_view td[data-name="state"] .badge.posted,
+.o_list_view td[data-name="state"] .o_badge.posted {
+    background-color: var(--accent) !important;
+    color: #111827 !important;
+}
+
+/* Map common list view status values to badge colors for Odoo selection widgets.
+   Covers a few DOM variations used across Odoo versions (data-value, data-state,
+   and common value-based classes). Adjust mapping as needed. */
+.o_list_view .badge[data-value="sale"],
+.o_list_view .o_badge[data-value="sale"],
+.o_list_view .badge[data-state="sale"],
+.o_list_view .o_badge[data-state="sale"],
+.o_list_view .badge.sale,
+.o_list_view .o_badge.sale {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .badge[data-value="draft"],
+.o_list_view .o_badge[data-value="draft"],
+.o_list_view .badge[data-state="draft"],
+.o_list_view .o_badge[data-state="draft"],
+.o_list_view .badge.draft,
+.o_list_view .o_badge.draft,
+.o_list_view .badge[data-value="quotation"],
+.o_list_view .o_badge[data-value="quotation"] {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .badge[data-value="sent"],
+.o_list_view .o_badge[data-value="sent"],
+.o_list_view .badge[data-state="sent"],
+.o_list_view .o_badge[data-state="sent"],
+.o_list_view .badge.sent,
+.o_list_view .o_badge.sent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .badge[data-value="cancel"],
+.o_list_view .o_badge[data-value="cancel"],
+.o_list_view .badge[data-state="cancel"],
+.o_list_view .o_badge[data-state="cancel"],
+.o_list_view .badge.cancel,
+.o_list_view .o_badge.cancel {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+/* Additional selectors: target badges rendered inside the 'state' column cells
+   which sometimes don't have data-* attributes but are within td[data-name="state"]. */
+.o_list_view td[data-name="state"] .badge,
+.o_list_view td[data-name="state"] .o_badge {
+    background-color: rgba(15,23,42,0.08) !important;
+    color: var(--primary-accent) !important;
+}
+
+.o_list_view td[data-name="state"] .badge[data-value="sale"],
+.o_list_view td[data-name="state"] .o_badge[data-value="sale"],
+.o_list_view td[data-name="state"] .badge.sale,
+.o_list_view td[data-name="state"] .o_badge.sale {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view td[data-name="state"] .badge[data-value="draft"],
+.o_list_view td[data-name="state"] .o_badge[data-value="draft"],
+.o_list_view td[data-name="state"] .badge.draft,
+.o_list_view td[data-name="state"] .o_badge.draft {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view td[data-name="state"] .badge[data-value="sent"],
+.o_list_view td[data-name="state"] .o_badge[data-value="sent"],
+.o_list_view td[data-name="state"] .badge.sent,
+.o_list_view td[data-name="state"] .o_badge.sent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view td[data-name="state"] .badge[data-value="cancel"],
+.o_list_view td[data-name="state"] .o_badge[data-value="cancel"],
+.o_list_view td[data-name="state"] .badge.cancel,
+.o_list_view td[data-name="state"] .o_badge.cancel {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+}
+
+/* Fallback: make any badge inside list header/body more prominent */
+.o_list_view .badge {
+    opacity: 1 !important;
+    box-shadow: none !important;
+}
+
+/* Badge with Icon */
+.badge i,
+.badge .fa,
+.badge .oi {
+    margin-right: 4px;
+    font-size: 10px;
+}
+
+/* Pill Badge - Extra Rounded */
+.badge-pill {
+    padding: 4px 12px !important;
+    border-radius: 999px !important;
+}
+
+/* Outlined Badge Variants */
+.badge-outline {
+    background-color: transparent !important;
+    border: 1px solid currentColor !important;
+}
+
+.badge-outline-success {
+    color: var(--success) !important;
+    border-color: var(--success) !important;
+}
+
+.badge-outline-warning {
+    color: var(--warning) !important;
+    border-color: var(--warning) !important;
+}
+
+.badge-outline-danger {
+    color: var(--danger) !important;
+    border-color: var(--danger) !important;
+}
+
+/* Ensure CANCELLED / cancel badges inside Kanban use filled danger style
+   (some kanban templates render badges as outlined or with neutral classes). */
+.o_kanban_record .badge[data-value="cancel"],
+.o_kanban_record .o_badge[data-value="cancel"],
+.o_kanban_record .badge.cancel,
+.o_kanban_record .o_badge.cancel,
+.o_kanban_record .badge.text-bg-secondary,
+.o_kanban_record .badge.text-bg-muted,
+.o_kanban_record .badge.text-bg-300,
+.o_kanban_record .o_badge.text-bg-300,
+.o_kanban_record .badge-outline-danger,
+.o_kanban_record .o_badge.badge-outline-danger {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Kanban: ensure common status values use the theme colors (same mapping as list)
+   so statuses like POSTED, SALE, DRAFT, SENT, CANCELLED show correctly in kanban */
+/* -------------------------------------------------------------------------- */
+.o_kanban_record .badge.text-bg-success,
+.o_kanban_record .text-bg-success,
+.o_kanban_view .badge.text-bg-success,
+.o_kanban_view .text-bg-success,
+.o_kanban_record .badge[data-value="sale"],
+.o_kanban_record .o_badge[data-value="sale"],
+.o_kanban_record .badge[data-state="sale"],
+.o_kanban_record .o_badge[data-state="sale"],
+.o_kanban_record .badge.sale,
+.o_kanban_record .o_badge.sale,
+.o_kanban_view .badge[data-value="sale"],
+.o_kanban_view .badge.sale {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+}
+
+.o_kanban_record .badge[data-value="draft"],
+.o_kanban_record .o_badge[data-value="draft"],
+.o_kanban_record .badge[data-state="draft"],
+.o_kanban_record .o_badge[data-state="draft"],
+.o_kanban_record .badge.draft,
+.o_kanban_record .o_badge.draft,
+.o_kanban_view .badge[data-value="draft"],
+.o_kanban_view .badge.draft,
+.o_kanban_record .badge[data-value="quotation"],
+.o_kanban_record .o_badge[data-value="quotation"] {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.o_kanban_record .badge[data-value="sent"],
+.o_kanban_record .o_badge[data-value="sent"],
+.o_kanban_record .badge[data-state="sent"],
+.o_kanban_record .o_badge[data-state="sent"],
+.o_kanban_record .badge.sent,
+.o_kanban_record .o_badge.sent,
+.o_kanban_view .badge[data-value="sent"],
+.o_kanban_view .badge.sent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+/* POSTED (invoices/posting) often appears as 'posted' value in list — mirror for kanban */
+.o_kanban_record .badge[data-value="posted"],
+.o_kanban_record .o_badge[data-value="posted"],
+.o_kanban_record .badge[data-state="posted"],
+.o_kanban_record .o_badge[data-state="posted"],
+.o_kanban_record .badge.posted,
+.o_kanban_record .o_badge.posted,
+.o_kanban_view .badge[data-value="posted"],
+.o_kanban_view .badge.posted {
+    background-color: var(--accent) !important;
+    color: #111827 !important;
+}
+
+/* CANCEL/CANCELLED mapping for kanban (cover multiple DOM variants) */
+.o_kanban_record .badge[data-value="cancel"],
+.o_kanban_record .o_badge[data-value="cancel"],
+.o_kanban_record .badge.cancel,
+.o_kanban_record .o_badge.cancel,
+.o_kanban_record .badge[data-value="cancelled"],
+.o_kanban_record .o_badge[data-value="cancelled"],
+.o_kanban_record .badge.cancelled,
+.o_kanban_record .o_badge.cancelled,
+.o_kanban_view .badge[data-value="cancel"],
+.o_kanban_view .badge.cancel,
+.o_kanban_view .badge[data-value="cancelled"],
+.o_kanban_view .badge.cancelled,
+.o_kanban_record .badge.text-bg-secondary,
+.o_kanban_record .badge.text-bg-muted,
+.o_kanban_record .badge.text-bg-300,
+.o_kanban_record .o_badge.text-bg-300 {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* Ensure outlined variants inside kanban also show filled color */
+.o_kanban_record .badge-outline-danger,
+.o_kanban_view .badge-outline-danger,
+.o_kanban_record .o_badge.badge-outline-danger {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Broad enforcement: apply the same status color mappings used in list views
+   to all kanban badge/dom variants. This increases selector specificity to
+   override other CSS that may render neutral/outlined badges. */
+/* -------------------------------------------------------------------------- */
+.o_list_view .badge[data-value="posted"],
+.o_kanban_view .badge[data-value="posted"],
+.o_kanban_record .badge[data-value="posted"],
+.o_kanban_card .badge[data-value="posted"],
+.oe_kanban_card .badge[data-value="posted"],
+.o_list_view .o_badge[data-value="posted"],
+.o_kanban_view .o_badge[data-value="posted"],
+.o_kanban_record .o_badge[data-value="posted"],
+.o_kanban_card .o_badge[data-value="posted"],
+.oe_kanban_card .o_badge[data-value="posted"],
+.o_list_view td[data-name="state"] .badge.posted,
+.o_kanban_view .badge.posted,
+.o_kanban_record .badge.posted,
+.o_kanban_record .o_badge.posted {
+    background-color: var(--accent) !important;
+    color: #111827 !important;
+}
+
+/* Target badges placed inside kanban headers / card headers (common for invoices/apps) */
+.o_kanban_view .o_kanban_card_header .badge,
+.o_kanban_view .o_kanban_card_header .o_badge,
+.o_kanban_view .oe_kanban_global_click .badge,
+.o_kanban_view .oe_kanban_global_click .o_badge,
+.o_kanban_card .o_kanban_card_header .badge,
+.o_kanban_card .o_kanban_card_header .o_badge {
+    /* keep base pill styling but allow status mapping below to override background */
+    background-color: rgba(15,23,42,0.06) !important;
+    color: var(--primary-accent) !important;
+}
+
+/* header-specific mappings for common statuses */
+.o_kanban_view .o_kanban_card_header .badge.posted,
+.o_kanban_view .o_kanban_card_header .o_badge.posted,
+.o_kanban_view .oe_kanban_global_click .badge.posted,
+.o_kanban_view .oe_kanban_global_click .o_badge.posted {
+    background-color: var(--accent) !important;
+    color: #111827 !important;
+}
+
+.o_kanban_view .o_kanban_card_header .badge.cancel,
+.o_kanban_view .o_kanban_card_header .o_badge.cancel,
+.o_kanban_view .oe_kanban_global_click .badge.cancel,
+.o_kanban_view .oe_kanban_global_click .o_badge.cancel,
+.o_kanban_view .o_kanban_card_header .badge.cancelled,
+.o_kanban_view .o_kanban_card_header .o_badge.cancelled {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+.o_kanban_view .o_kanban_card_header .badge.sent,
+.o_kanban_view .o_kanban_card_header .o_badge.sent,
+.o_kanban_view .o_kanban_card_header .badge.draft,
+.o_kanban_view .o_kanban_card_header .o_badge.draft,
+.o_kanban_view .o_kanban_card_header .badge.sale,
+.o_kanban_view .o_kanban_card_header .o_badge.sale {
+    /* reuse existing variables */
+}
+
+/* Handle badges rendered with a neutral utility class such as `text-bg-default`
+   but carrying a `raw-value` attribute (common in some kanban templates). */
+.o_kanban_view .badge.text-bg-default[raw-value="posted"],
+.o_kanban_record .badge.text-bg-default[raw-value="posted"],
+.o_kanban_view .o_badge.text-bg-default[raw-value="posted"],
+.o_kanban_record .o_badge.text-bg-default[raw-value="posted"] {
+    background-color: var(--accent) !important;
+    color: #111827 !important;
+}
+
+.o_kanban_view .badge.text-bg-default[raw-value="sale"],
+.o_kanban_record .badge.text-bg-default[raw-value="sale"],
+.o_kanban_view .o_badge.text-bg-default[raw-value="sale"],
+.o_kanban_record .o_badge.text-bg-default[raw-value="sale"] {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+}
+
+.o_kanban_view .badge.text-bg-default[raw-value="draft"],
+.o_kanban_record .badge.text-bg-default[raw-value="draft"],
+.o_kanban_view .o_badge.text-bg-default[raw-value="draft"],
+.o_kanban_record .o_badge.text-bg-default[raw-value="draft"] {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.o_kanban_view .badge.text-bg-default[raw-value="sent"],
+.o_kanban_record .badge.text-bg-default[raw-value="sent"],
+.o_kanban_view .o_badge.text-bg-default[raw-value="sent"],
+.o_kanban_record .o_badge.text-bg-default[raw-value="sent"] {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+.o_kanban_view .badge.text-bg-default[raw-value="cancel"],
+.o_kanban_record .badge.text-bg-default[raw-value="cancel"],
+.o_kanban_view .o_badge.text-bg-default[raw-value="cancel"],
+.o_kanban_record .o_badge.text-bg-default[raw-value="cancel"],
+.o_kanban_view .badge.text-bg-default[raw-value="cancelled"],
+.o_kanban_record .badge.text-bg-default[raw-value="cancelled"],
+.o_kanban_view .o_badge.text-bg-default[raw-value="cancelled"],
+.o_kanban_record .o_badge.text-bg-default[raw-value="cancelled"] {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* Fallback: any badge in kanban with text-bg-default should at least be visible */
+.o_kanban_view .badge.text-bg-default,
+.o_kanban_view .o_badge.text-bg-default,
+.o_kanban_record .badge.text-bg-default,
+.o_kanban_record .o_badge.text-bg-default {
+    opacity: 1 !important;
+    box-shadow: none !important;
+}
+
+.o_list_view .badge[data-value="sale"],
+.o_kanban_view .badge[data-value="sale"],
+.o_kanban_record .badge[data-value="sale"],
+.o_kanban_card .badge[data-value="sale"],
+.oe_kanban_card .badge[data-value="sale"],
+.o_list_view .o_badge[data-value="sale"],
+.o_kanban_view .o_badge[data-value="sale"],
+.o_kanban_record .o_badge[data-value="sale"],
+.o_kanban_card .o_badge[data-value="sale"],
+.oe_kanban_card .o_badge[data-value="sale"],
+.o_list_view td[data-name="state"] .badge.sale,
+.o_kanban_view .badge.sale,
+.o_kanban_record .badge.sale,
+.o_kanban_record .o_badge.sale {
+    background-color: var(--success) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .badge[data-value="draft"],
+.o_kanban_view .badge[data-value="draft"],
+.o_kanban_record .badge[data-value="draft"],
+.o_kanban_card .badge[data-value="draft"],
+.oe_kanban_card .badge[data-value="draft"],
+.o_list_view .o_badge[data-value="draft"],
+.o_kanban_view .o_badge[data-value="draft"],
+.o_kanban_record .o_badge[data-value="draft"],
+.o_kanban_card .o_badge[data-value="draft"],
+.oe_kanban_card .o_badge[data-value="draft"],
+.o_list_view td[data-name="state"] .badge.draft,
+.o_kanban_view .badge.draft,
+.o_kanban_record .badge.draft,
+.o_kanban_record .o_badge.draft {
+    background-color: var(--info) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .badge[data-value="sent"],
+.o_kanban_view .badge[data-value="sent"],
+.o_kanban_record .badge[data-value="sent"],
+.o_kanban_card .badge[data-value="sent"],
+.oe_kanban_card .badge[data-value="sent"],
+.o_list_view .o_badge[data-value="sent"],
+.o_kanban_view .o_badge[data-value="sent"],
+.o_kanban_record .o_badge[data-value="sent"],
+.o_kanban_card .o_badge[data-value="sent"],
+.oe_kanban_card .o_badge[data-value="sent"],
+.o_list_view td[data-name="state"] .badge.sent,
+.o_kanban_view .badge.sent,
+.o_kanban_record .badge.sent,
+.o_kanban_record .o_badge.sent {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
+
+.o_list_view .badge[data-value="cancel"],
+.o_kanban_view .badge[data-value="cancel"],
+.o_kanban_record .badge[data-value="cancel"],
+.o_kanban_card .badge[data-value="cancel"],
+.oe_kanban_card .badge[data-value="cancel"],
+.o_list_view .o_badge[data-value="cancel"],
+.o_kanban_view .o_badge[data-value="cancel"],
+.o_kanban_record .o_badge[data-value="cancel"],
+.o_kanban_card .o_badge[data-value="cancel"],
+.oe_kanban_card .o_badge[data-value="cancel"],
+.o_list_view td[data-name="state"] .badge.cancel,
+.o_kanban_view .badge.cancel,
+.o_kanban_record .badge.cancel,
+.o_kanban_record .o_badge.cancel,
+.o_list_view .badge[data-value="cancelled"],
+.o_kanban_view .badge[data-value="cancelled"],
+.o_kanban_record .badge[data-value="cancelled"],
+.o_kanban_card .badge[data-value="cancelled"],
+.oe_kanban_card .badge[data-value="cancelled"],
+.o_list_view .o_badge[data-value="cancelled"],
+.o_kanban_view .o_badge[data-value="cancelled"],
+.o_kanban_record .o_badge[data-value="cancelled"],
+.o_kanban_card .o_badge[data-value="cancelled"],
+.oe_kanban_card .o_badge[data-value="cancelled"],
+.o_list_view td[data-name="state"] .badge.cancelled,
+.o_kanban_view .badge.cancelled,
+.o_kanban_record .badge.cancelled,
+.o_kanban_record .o_badge.cancelled,
+.o_kanban_record .badge.text-bg-secondary,
+.o_kanban_record .badge.text-bg-muted,
+.o_kanban_record .badge.text-bg-300,
+.o_kanban_record .o_badge.text-bg-300,
+.o_kanban_view .o_status_label,
+.o_kanban_record .o_status_label {
+    background-color: var(--danger) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 8. VIEW ENHANCEMENTS                                                       */
+/* -------------------------------------------------------------------------- */
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3c6398;
+}
+
+/* Kanban Cards */
+.o_kanban_record {
+    border-radius: 12px !important;
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    background: #ffffff !important;
+    padding: 14px !important;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.06) !important;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    overflow: hidden;
+}
+.o_kanban_record:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(15,23,42,0.08) !important;
+    border-color: var(--primary-accent) !important;
+    z-index: 10;
+}
+
+/* Kanban container & group rounding */
+.o_kanban_view .o_kanban_group,
+.o_kanban_view .o_kanban_column,
+.o_kanban_view {
+    border-radius: 12px !important;
+    overflow: visible !important;
+}
+
+.o_kanban_view .o_kanban_column {
+    background: #fbfdff !important;
+    border: 1px solid rgba(226,232,240,0.85) !important;
+    padding: 10px !important;
+    margin-right: 12px !important;
+}
+
+/* Make long form pages scroll within the form region so header/sidebar remain visible
+   and users can access content below without the whole page jumping. Scoped and
+   conservative heights to avoid breaking Odoo layout. */
+.o_form_view .o_form_sheet_bg,
+.o_form_view .o_form_sheet {
+    max-height: calc(100vh - 220px) !important;
+    overflow-y: auto !important;
+    padding-right: 8px !important;
+}
+
+/* Make list views scrollable when large (keeps header, filters and sidebar visible) */
+.o_list_view .o_content,
+.o_list_view .o_list_table {
+    max-height: calc(100vh - 200px) !important;
+    overflow: auto !important;
+}
+
+/* Subtle custom scrollbar for scrollable regions */
+.o_form_view .o_form_sheet_bg::-webkit-scrollbar,
+.o_list_view .o_content::-webkit-scrollbar,
+.o_list_view .o_list_table::-webkit-scrollbar {
+    width: 10px;
+}
+
+.o_form_view .o_form_sheet_bg::-webkit-scrollbar-track,
+.o_list_view .o_content::-webkit-scrollbar-track,
+.o_list_view .o_list_table::-webkit-scrollbar-track {
+    background: rgba(15,23,42,0.02);
+    border-radius: 6px;
+}
+
+.o_form_view .o_form_sheet_bg::-webkit-scrollbar-thumb,
+.o_list_view .o_content::-webkit-scrollbar-thumb,
+.o_list_view .o_list_table::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary-accent), var(--primary-hover));
+    border-radius: 6px;
+    border: 2px solid rgba(255,255,255,0.06);
+    box-shadow: 0 4px 10px rgba(15,23,42,0.08) inset;
+}
+.o_form_view .o_form_sheet_bg::-webkit-scrollbar-thumb:hover,
+.o_list_view .o_content::-webkit-scrollbar-thumb:hover,
+.o_list_view .o_list_table::-webkit-scrollbar-thumb:hover {
+    filter: brightness(0.95);
+}
+
+/* Non-webkit: provide matching colors for Firefox */
+.o_form_view .o_form_sheet_bg,
+.o_list_view .o_content,
+.o_list_view .o_list_table {
+    scrollbar-color: var(--primary-accent) rgba(86, 122, 205, 0.02);
+    scrollbar-width: thin;
+}
+
+/* Portal Preview Button */
+.o_portal button[name="action_preview_sale_order"],
+button[name="action_preview_sale_order"] {
+    background: #ffffff !important;
+    color: var(--primary-accent) !important;
+    border: 1px solid rgba(226,232,240,1) !important;
+    box-shadow: 0 6px 14px rgba(34, 53, 97, 0.06) !important;
+    border-radius: 10px !important;
+    padding: 10px 16px !important;
+    font-weight: 600 !important;
+}
+.o_portal button[name="action_preview_sale_order"]:hover,
+button[name="action_preview_sale_order"]:hover {
+    background: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15,23,42,0.08) !important;
+}
+
+/* Focus Visibility */
+*:focus-visible {
+    outline: 2px solid rgba(48, 89, 130, 0.3);
+    outline-offset: 1px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 9. NAV TABS - ACTIVE TAB HIGHLIGHTING                                      */
+/* Make the clicked/active tab visually prominent and remove previous highlight */
+/* Targets Odoo's nav-tabs used in form views (e.g. order lines, other info) */
+.nav.nav-tabs .nav-link {
+    color: var(--primary-accent) !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 8px 14px !important;
+    border-radius: 10px !important;
+    transition: background var(--anim-speed), color var(--anim-speed), transform 0.12s ease;
+}
+
+.nav.nav-tabs .nav-link:hover {
+    background: rgba(52, 79, 106, 0.04) !important;
+    color: var(--primary-accent) !important;
+}
+
+.nav.nav-tabs .nav-link.active,
+.nav.nav-tabs .nav-item .nav-link.active,
+.nav.nav-tabs .nav-link:active {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-hover)) !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 18px rgba(44,62,80,0.12) !important;
+    transform: translateY(-1px);
+}
+
+/* Ensure focus/keyboard navigation shows the same active style */
+.nav.nav-tabs .nav-link:focus {
+    outline: none !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. FORM ELEMENTS - COMPLETE STYLING FOR ALL INPUT TYPES                   */
+/* -------------------------------------------------------------------------- */
+
+/* Base Input Styling - Text, Email, Number */
+.o_form_view .o_field_widget .o_input,
+.o_form_view input[type="text"],
+.o_form_view input[type="email"],
+.o_form_view input[type="number"],
+.o_form_view input[type="password"],
+.o_form_view input[type="tel"],
+.o_form_view input[type="url"],
+.o_form_view input[type="date"],
+.o_form_view input[type="datetime-local"],
+.o_form_view input[type="time"] {
+    border-radius: var(--radius-std) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    background: #ffffff !important;
+    padding: 8px 12px !important;
+    height: var(--btn-height) !important;
+    min-height: var(--btn-height) !important;
+    line-height: 1.4 !important;
+    font-size: 14px !important;
+    transition: all 0.2s ease;
+    color: var(--primary-accent) !important;
+    box-sizing: border-box !important;
+    width: 100%;
+}
+
+/* Textarea Styling */
+.o_form_view textarea,
+.o_field_text textarea,
+.o_field_html textarea {
+    border-radius: var(--radius-std) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    background: #ffffff !important;
+    padding: 10px 12px !important;
+    height: auto !important;
+    min-height: calc(var(--btn-height) * 2.5) !important;
+    line-height: 1.6 !important;
+    font-size: 14px !important;
+    resize: vertical !important;
+    transition: all 0.2s ease;
+    color: var(--primary-accent) !important;
+    font-family: inherit;
+}
+
+/* Select Dropdown Styling */
+.o_form_view select,
+.o_field_selection select {
+    border-radius: var(--radius-std) !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    background: #ffffff !important;
+    padding: 8px 32px 8px 12px !important;
+    height: var(--btn-height) !important;
+    font-size: 14px !important;
+    color: var(--primary-accent) !important;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, rgba(0,0,0,0.5) 50%), 
+                      linear-gradient(135deg, rgba(0,0,0,0.5) 50%, transparent 50%);
+    background-position: calc(100% - 15px) calc(1em + 2px), calc(100% - 10px) calc(1em + 2px);
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    transition: all 0.2s ease;
+}
+
+/* Checkboxes - Custom Styled */
+.o_form_view input[type="checkbox"],
+.o_checkbox input[type="checkbox"] {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 8px 0 0 !important;
+    vertical-align: middle !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 2px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: 4px !important;
+    background: #ffffff !important;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.o_form_view input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-hover)) !important;
+    border-color: var(--primary-accent) !important;
+}
+
+.o_form_view input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Radio Buttons - Custom Styled */
+.o_form_view input[type="radio"],
+.o_radio input[type="radio"] {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 8px 0 0 !important;
+    vertical-align: middle !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 2px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.o_form_view input[type="radio"]:checked {
+    border-color: var(--primary-accent) !important;
+}
+
+.o_form_view input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(135deg, var(--primary-accent), var(--primary-hover));
+    border-radius: 50%;
+}
+
+/* Focus States - All Input Types */
+.o_form_view input:focus,
+.o_form_view select:focus,
+.o_form_view textarea:focus,
+.o_form_view .o_input:focus,
+.o_field_widget:focus-within {
+    border-color: var(--primary-accent) !important;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1) !important;
+    outline: none !important;
+}
+
+/* Hover States */
+.o_form_view input:hover,
+.o_form_view select:hover,
+.o_form_view textarea:hover {
+    border-color: rgba(44, 62, 80, 0.3) !important;
+}
+
+/* VALIDATION STATES */
+
+/* Success State */
+.o_form_view .has-success input,
+.o_form_view .has-success select,
+.o_form_view .has-success textarea,
+.o_field_widget.o_field_invalid.has-success {
+    border-color: var(--success) !important;
+    background-color: rgba(46, 204, 113, 0.02) !important;
+}
+
+.o_form_view .has-success .o_field_widget::after {
+    content: "✓";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--success);
+    font-weight: bold;
+}
+
+/* Warning State */
+.o_form_view .has-warning input,
+.o_form_view .has-warning select,
+.o_form_view .has-warning textarea,
+.o_field_widget.has-warning {
+    border-color: var(--warning) !important;
+    background-color: rgba(241, 196, 15, 0.02) !important;
+}
+
+/* Danger/Error State */
+.o_form_view .has-danger input,
+.o_form_view .has-danger select,
+.o_form_view .has-danger textarea,
+.o_form_view .o_field_invalid input,
+.o_field_widget.o_field_invalid {
+    border-color: var(--danger) !important;
+    background-color: rgba(231, 76, 60, 0.02) !important;
+}
+
+/* Info State */
+.o_form_view .has-info input,
+.o_form_view .has-info select,
+.o_form_view .has-info textarea,
+.o_field_widget.has-info {
+    border-color: var(--info) !important;
+    background-color: rgba(52, 152, 219, 0.02) !important;
+}
+
+/* Validation Feedback Text */
+.form-control-feedback,
+.o_form_invalid_msg,
+.invalid-feedback {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--danger);
+}
+
+/* Many2One Field Styling */
+.o_form_view .o_field_many2one input,
+.o_field_many2one .o_input {
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    border-radius: var(--radius-std) !important;
+    padding: 8px 12px !important;
+}
+
+/* Readonly Fields - Reduced Contrast */
+.o_form_view .o_field_widget[readonly],
+.o_form_view .o_field_widget.o_readonly,
+.o_form_view input[readonly],
+.o_form_view select[readonly],
+.o_form_view textarea[readonly] {
+    background: #f8fafc !important;
+    color: #64748b !important;
+    border-color: rgba(226, 232, 240, 0.7) !important;
+    cursor: not-allowed;
+}
+
+/* Placeholder Styling */
+.o_form_view input::placeholder,
+.o_form_view textarea::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+/* Label Styling */
+.o_form_view label,
+.o_form_label {
+    font-weight: 500;
+    color: var(--primary-accent);
+    margin-bottom: 6px;
+    display: block;
+    font-size: 13px;
+}
+
+/* Required Field Indicator */
+.o_form_view .o_required_modifier label::after,
+.o_form_label.o_required::after {
+    content: " *";
+    color: var(--danger);
+    font-weight: bold;
+}
+
+/* Field Help Text */
+.o_form_view .o_field_help,
+.form-text {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+    display: block;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 8. REMOVE EXTRA VERTICAL GAPS BETWEEN NAVBAR, CONTROL PANEL AND LIST VIEW  */
+/* -------------------------------------------------------------------------- */
+/* Remove space between main navbar and control panel */
+.o_main_navbar + .o_web_client .o_control_panel,
+.o_main_navbar + .o_web_client .o_control_panel .o_control_panel_main {
+    margin-top: 0 !important;
+    padding-top: 6px !important;
+}
+
+/* Ensure control panel itself doesn't add extra bottom margin */
+.o_web_client .o_control_panel {
+    margin-bottom: 0 !important;
+    padding-bottom: 6px !important;
+}
+
+/* Remove gap between control panel and the list view heading/table */
+.o_control_panel + .o_content .o_list_view,
+.o_control_panel + .o_view_manager_content .o_list_view,
+.o_control_panel + .o_content .o_list_view .o_list_table_wrapper {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Also tighten default list view spacing where safe */
+.o_list_view,
+.table-responsive,
+.o_list_table_wrapper {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Stronger rules: remove any top padding/margin on content blocks that follow the control panel.
+   This targets a few common DOM structures used by Odoo list views. */
+.o_control_panel + .o_view_manager_content,
+.o_control_panel + .o_view_manager_content .o_content,
+.o_control_panel + .o_view_manager_content .o_list_view,
+.o_control_panel + .o_view_manager_content .o_list_view .o_content,
+.o_control_panel + .o_content,
+.o_control_panel ~ .o_content,
+.o_control_panel ~ .o_view_manager_content {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ensure list content padding is removed so header sits flush under control panel */
+.o_list_view .o_content,
+.o_list_view .o_list_table_wrapper,
+.o_list_view .o_list_table {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.o_control_panel + .o_content.o_card,
+.o_control_panel + .o_view_manager_content .o_content.o_card {
+    padding-top: 0 !important;
+}
+
+
+/* 8. MONETARY INPUT FIXES - hide inline currency symbol and ensure input is editable */
+
+
+.o_field_monetary {
+    /* remove visible leading currency symbol inserted as a span */
+    .text-nowrap .o_input > span:first-child,
+    .o_input.position-absolute > span:first-child {
+        display: none !important;
+    }
+    /* hide ghost-value if present */
+    .o_monetary_ghost_value {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+    }
+    /* ensure the actual text input is clickable and above overlays */
+    input.o_input {
+        pointer-events: auto !important;
+        position: relative !important;
+        z-index: 3 !important;
+        background: transparent !important;
+    }
+}
+.o_portal_back_container {
+    background-color: #2e455d;
+    color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px 0;
+}

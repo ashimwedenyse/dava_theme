@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template
+        id="portal_back_button_template"
+        inherit_id="portal.portal_layout"
+        name="Portal Global Back Button"
+    >
+
+        <!-- Insert button above portal content (match common portal wrapper variants) -->
+        <xpath expr="(//div[contains(@class,'o_portal_wrap') or contains(@class,'o_portal') or contains(@class,'o_portal_container')])[1]" position="before">
+
+            <!-- Hide button on main portal home -->
+            <t t-if="request.httprequest.path not in ['/my', '/my/']">
+                <div class="o_portal_back_container mb-3">
+                    <div class="container">
+                        <a href="/my" class="btn btn-secondary o_portal_back_btn">
+                            <i class="fa fa-arrow-left me-2"/>
+                            Back to My Account
+                        </a>
+                    </div>
+                </div>
+            </t>
+
+        </xpath>
+
+    </template>
+</odoo>

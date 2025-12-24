@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="code_custom_layout" model="ir.ui.view">
+        <field name="name">theme.custom.layout</field>
+        <field name="inherit_id" ref="web.layout"/>
+        <field name="arch" type="xml">
+            <xpath expr="//meta[@content='IE=edge']" position="after">
+                <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+            </xpath>
+            
+            
+        </field>
+    </record>
+
+    
+
+    <record id="split_login_layout" model="ir.ui.view">
+        <field name="name">theme.split.login.layout</field>
+        <field name="priority">9999</field>
+        <field name="inherit_id" ref="web.login_layout"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="replace">
+                <t t-call="web.layout">
+                    <t t-set="head">
+                        <t t-call-assets="web.assets_frontend" t-js="false"/>
+                        <t t-call-assets="web.assets_frontend" t-css="false"/>
+
+                        <style>
+                            html, body {
+                                height: 100% !important;
+                                margin: 0 !important;
+                                overflow-x: hidden;
+                                font-family: 'Poppins', sans-serif;
+                            }
+
+                            .split-screen-container {
+                                display: flex;
+                                width: 100vw;
+                                min-height: 100vh;
+                                flex-wrap: wrap;
+                            }
+
+                            .brand-panel {
+                                width: 60%;
+                                background-color: var(--primary-accent);
+                                background-image: linear-gradient(135deg, var(--primary-accent) 0%, var(--primary-hover) 100%);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                position: relative;
+                                overflow: hidden;
+                            }
+
+                            .login-panel {
+                                width: 40%;
+                                background-color: white;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                position: relative;
+                            }
+
+                            .login-content-wrapper {
+                                width: 100%;
+                                max-width: 450px;
+                                padding: 40px;
+                            }
+
+                            @media (max-width: 992px) {
+                                .brand-panel {
+                                    width: 100%;
+                                    min-height: 300px;
+                                    padding: 40px 0;
+                                }
+                                .login-panel {
+                                    width: 100%;
+                                    min-height: 60vh;
+                                }
+                            }
+                        </style>
+                    </t>
+
+                    <div class="split-screen-container">
+
+                        <div class="brand-panel">
+                            <div style="position: absolute; top: -10%; left: -10%; width: 50%; height: 50%; background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%); border-radius: 50%;"></div>
+
+                            <div class="text-center text-white p-5 position-relative" style="z-index: 2;">
+                                <img src="/dava_theme/static/description/icon.png"
+                                     alt="Logo"
+                                     class="mb-4 shadow-lg rounded-circle"
+                                     style="width: 140px; height: 140px; object-fit: cover; background: white; padding: 10px; border: 4px solid rgba(255,255,255,0.2);"/>
+
+                                <h1 class="display-4 fw-bold mb-2">DAVA TECHNOLOGY</h1>
+                                <p class="lead opacity-75 fw-light" style="max-width: 500px; margin: 0 auto;">
+                                    Empower Your Businesses With The Latest Odoo Innovation. <br/> Secured, Fast, and Elegant.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="login-panel">
+                            <div class="login-content-wrapper">
+                                <div class="text-center mb-4 d-lg-none" style="display: none;">
+                                    <img src="/web/static/img/logo.png" alt="Logo" style="height: 50px;"/>
+                                </div>
+
+                                <div class="mb-5">
+                                    <h2 class="fw-bold text-dark">Welcome Back!</h2>
+                                    <p class="text-muted">Please enter your credentials to sign in.</p>
+                                </div>
+
+                                <t t-out="0"/>
+
+                                <div class="text-center mt-5 text-muted small">
+                                    <span class="opacity-50">Powered by Dava Technology</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </xpath>
+        </field>
+    </record>
+</odoo>
