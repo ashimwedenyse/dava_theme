@@ -23,36 +23,7 @@
     --list-header-end: var(--primary-hover);
 }
 
-/* -------------------------------------------------------------------------- */
-/* 2. NAVBAR: GLASSY "PEARL" EFFECT                                           */
-/* -------------------------------------------------------------------------- */
-.o_main_navbar {
-    background: linear-gradient(120deg, rgba(255,255,255,0.98), rgba(241,245,249,0.98)) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 2px 10px rgba(37, 36, 36, 0.05);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    height: 60px !important;
-    align-items: center;
-    transition: all var(--anim-speed) ease;
-}
-
-.o_main_navbar .top_heading {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #1e293b;
-}
-
-.o_theme_accent {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius-std);
-    background: linear-gradient(135deg, var(--primary-accent), #4338ca);
-    box-shadow: 0 4px 10px rgba(67, 56, 202, 0.2);
-    margin-right: 10px;
-}
+/* NAVBAR styles moved to navigation_bar.scss */
 
 /* -------------------------------------------------------------------------- */
 /* 3. ANIMATIONS (PROFESSIONAL FALLING EFFECT)                                */
@@ -726,10 +697,7 @@ table.o_list_table td,
 /* -------------------------------------------------------------------------- */
 /* 6. SIDEBAR & MENU                                                          */
 /* -------------------------------------------------------------------------- */
-.o_main_navbar + .o_web_client .o_sidebar {
-    background: #ffffff;
-    border-right: 1px solid #f1f5f9;
-}
+.o_main_navbar + .o_web_client .o_sidebar { /* moved to navigation_bar.scss */ }
 .o_menu_sections .o_menu_section .o_menu_label {
     font-weight: 700;
     color: #94a3b8;
@@ -847,29 +815,10 @@ table.o_list_table td,
 i.fa.fa-times,
 .fa-times:before,
 button.btn.btn-secondary > .fa-times,
-.btn.btn-secondary .fa-times,
-.btn .fa-times,
-.o_control_panel .btn .fa-times,
-.o_form_view .btn .fa-times,
-.o_main_navbar .fa.fa-times,
-.sidebar_panel a#closeSidebar i.fa-times,
-.o_statusbar_status i.fa-times,
-.o_form_header .fa.fa-times,
-.o_dialog .fa.fa-times {
-    color: #ffffff !important;
-    background-color: var(--danger) !important;
-    fill: #ffffff !important;
-    padding: 3px 6px !important;
-    border-radius: 4px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
+/* Icon styles moved to navigation_bar.scss */
 .o_control_panel .btn.btn-sm > .oi,
 .o_control_panel .btn.btn-sm > .fa,
-.o_control_panel .btn.btn-sm > svg {
+.o_control_panel .btn.btn-sm > svg { /* keep small button padding here */
     padding: 4px !important;
     border-radius: 4px !important;
 }
@@ -907,38 +856,7 @@ button.btn.btn-secondary > .fa-times,
 }
 
 /* Portal: Back to My Account button styling */
-.o_portal_back_container {
-    margin-top: 12px;
-    margin-bottom: 8px;
-    /* Position the portal back bar so it can overlap the header if needed
-       and appear in front of header action buttons (e.g. Contact Us). */
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 56px; /* adjust if your header has different height */
-    z-index: 200002 !important;
-}
-.o_portal_back_btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: inherit;
-    background: transparent;
-    border: 1px solid transparent;
-}
-.o_portal_back_btn .o_portal_back_text {
-    display: inline-block;
-}
-/* Make the button visually consistent with portal design */
-.o_portal_back_btn.btn-outline-secondary {
-    color: var(--text-color, #333);
-    border-color: rgba(0,0,0,0.08);
-    background-color: rgba(255,255,255,0.0);
-}
-.o_portal_back_btn:hover {
-    color: var(--primary-hover) !important;
-    text-decoration: none;
-}
+/* Portal back styles moved to navigation_bar.scss */
 
 /* Messaging menu unread-count badge: use success (green) */
 .o-mail-MessagingMenu-counter.badge.rounded-pill,
@@ -982,21 +900,7 @@ a > .fa:hover, a > .oi:hover,
     color: white !important;
 }
 
-/* Ensure header/control-panel icons remain visible even if a script
-   toggles or replaces header classes. This forces essential action icons
-   to stay visible (add/plus, status, close) so the user can always toggle
-   the sidebar and perform actions. */
-header .o_control_panel .btn,
-header .o_control_panel .btn > .fa,
-header .o_control_panel .o_control_panel_navigation .fa,
-header .o_main_navbar .fa,
-header .o_control_panel .o_cp_switch_buttons .fa,
-header .o_control_panel .o_control_panel_actions .fa {
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: inline-flex !important;
-    transform: none !important;
-}
+/* Header/icon visibility rules moved to navigation_bar.scss */
 
 /* Ensure the main 'Add / +' button is always visible and clickable
    across app switches. Targets common Odoo control panel layouts and
@@ -2208,16 +2112,10 @@ button[name="action_preview_sale_order"]:hover {
 /* -------------------------------------------------------------------------- */
 /* Remove space between main navbar and control panel */
 .o_main_navbar + .o_web_client .o_control_panel,
-.o_main_navbar + .o_web_client .o_control_panel .o_control_panel_main {
-    margin-top: 0 !important;
-    padding-top: 6px !important;
-}
+.o_main_navbar + .o_web_client .o_control_panel .o_control_panel_main { /* moved to navigation_bar.scss */ }
 
-/* Ensure control panel itself doesn't add extra bottom margin */
-.o_web_client .o_control_panel {
-    margin-bottom: 0 !important;
-    padding-bottom: 6px !important;
-}
+/* Ensure control panel itself doesn't add extra bottom margin (moved to navigation_bar.scss) */
+.o_web_client .o_control_panel { }
 
 /* Remove gap between control panel and the list view heading/table */
 .o_control_panel + .o_content .o_list_view,
