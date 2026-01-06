@@ -92,10 +92,10 @@
     <t t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension" owl="1">
         <xpath expr="//Dropdown" position="replace">
             <li class="dropdown">
-                <a id="openSidebar" style="display: block; cursor: pointer; padding: 0 10px;" t-ref="openSidebar">
+                <a id="openSidebar" class="dava-hamburger" style="display: block; cursor: pointer; padding: 0 10px;" t-ref="openSidebar">
                     <i class="fa fa-bars fa-lg"/>
                 </a>
-                <a id="closeSidebar" style="display: none; cursor: pointer; padding: 0 10px;" t-ref="closeSidebar">
+                <a id="closeSidebar" class="dava-hamburger" style="display: none; cursor: pointer; padding: 0 10px;" t-ref="closeSidebar">
                     <i class="fa fa-bars fa-lg"/>
                 </a>
             </li>
